@@ -1,4 +1,7 @@
 import discord
+import os
+
+my_secret = os.environ['BOT_TOKEN']
 
 client = discord.Client()
 
@@ -14,4 +17,4 @@ async def on_message(message):
   if message.content.startswith('/hello'):
     await message.channel.send('Hello World!')
 
-client.run()
+client.run(my_secret)
