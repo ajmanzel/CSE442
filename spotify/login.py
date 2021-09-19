@@ -1,3 +1,4 @@
+import os
 from spotipy.client import Spotify
 from KEYS.spotifyKeys import *
 import spotipy
@@ -11,6 +12,5 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                client_secret=CLIENT_SECRET,
                                                redirect_uri=REDIRECT_URL,
                                                scope=scopes))
-
 res = sp.current_user_top_tracks(limit=1)
-print(res)
+print(os.system)
