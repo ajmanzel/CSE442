@@ -1,20 +1,23 @@
 import discord
-import os
 
-my_secret = os.environ['BOT_TOKEN']
+keyInfo = open("/Users/anthony/PycharmProjects/CSE442/keys", "r")
+my_secret = keyInfo.readline()
 
 client = discord.Client()
 
+
 @client.event
 async def on_ready():
-  print('We have logged in as {0.user}'.format(client))
+    print('We have logged in as {0.user}'.format(client))
+
 
 @client.event
 async def on_message(message):
-  if message.author == client.user:
-    return
+    if message.author == client.user:
+        return
 
-  if message.content.startswith('/hello'):
-    await message.channel.send('Hello World!')
+    if message.content.startswith('/hello'):
+        await message.channel.send('Hello World!')
+
 
 client.run(my_secret)
