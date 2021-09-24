@@ -2,10 +2,9 @@ import discord
 from discord.ext import commands, tasks
 import youtube_dl
 import os
+from discKEYS.disctoken import *
 
-
-#keyInfo = open("/Users/anthony/PycharmProjects/CSE442/keys", "r")
-my_secret = "ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.r0IgYyX4cTXC-gugnVuautrtKj4"
+my_secret = TOKEN
 
 client = commands.Bot(command_prefix='/')
 
@@ -21,8 +20,8 @@ async def hello(cxt):
 
 
 @client.command(pass_context=True)
-async def TheWeekend(cxt):
-    return
+async def topsongs(cxt, name : str):
+
 
 @client.command(pass_context=True)
 async def ping(cxt):
