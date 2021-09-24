@@ -21,7 +21,7 @@ async def hello(cxt):
 
 @client.command(pass_context=True)
 async def topsongs(cxt, name : str):
-
+    return
 
 @client.command(pass_context=True)
 async def ping(cxt):
