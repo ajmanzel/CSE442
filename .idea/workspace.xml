@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="" />
+    <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +64,7 @@
       <workItem from="1632423313154" duration="187000" />
       <workItem from="1632591171320" duration="2755000" />
       <workItem from="1632595545959" duration="84000" />
-      <workItem from="1632595702533" duration="5140000" />
+      <workItem from="1632595702533" duration="5415000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -106,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632603058539</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixing req file for heroku #15">
+      <created>1632603513026</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632603513026</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +128,7 @@
     <MESSAGE value="adding reqs for heroku deployment #15" />
     <MESSAGE value="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.gitignore&#10;#&#9;.idea/inspectionProfiles/profiles_settings.xml&#10;#&#9;Author.txt&#10;#&#9;discord/main.py" />
     <MESSAGE value="adding runtime file for heroku #15" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding runtime file for heroku #15" />
+    <MESSAGE value="fixing req file for heroku #15" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing req file for heroku #15" />
   </component>
 </project>
