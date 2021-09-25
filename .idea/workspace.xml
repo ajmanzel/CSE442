@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_20_21,_9_26_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_20_21__9_26_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spotify/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spotify/artist_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Author.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Author.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discord/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/discord/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runtime" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +65,7 @@
       <workItem from="1632423313154" duration="187000" />
       <workItem from="1632591171320" duration="2755000" />
       <workItem from="1632595545959" duration="84000" />
-      <workItem from="1632595702533" duration="4164000" />
+      <workItem from="1632595702533" duration="4795000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -104,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632601994836</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.gitignore&#10;#&#9;.idea/inspectionProfiles/profiles_settings.xml&#10;#&#9;Author.txt&#10;#&#9;discord/main.py">
+      <created>1632602296706</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632602296706</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
