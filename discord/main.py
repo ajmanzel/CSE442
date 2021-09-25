@@ -5,7 +5,7 @@ import os
 
 # from discKEYS.disctoken import *
 
-my_secret = process.env.TOKEN
+my_secret = os.environ.get('TOKEN')
 
 client = commands.Bot(command_prefix='/')
 
