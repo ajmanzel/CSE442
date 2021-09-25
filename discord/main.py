@@ -2,9 +2,10 @@ import discord
 from discord.ext import commands, tasks
 import youtube_dl
 import os
-from discKEYS.disctoken import *
 
-my_secret = TOKEN
+# from discKEYS.disctoken import *
+
+my_secret = process.env.TOKEN
 
 client = commands.Bot(command_prefix='/')
 
@@ -20,8 +21,9 @@ async def hello(cxt):
 
 
 @client.command(pass_context=True)
-async def topsongs(cxt, name : str):
+async def topsongs(cxt, name: str):
     return
+
 
 @client.command(pass_context=True)
 async def ping(cxt):
