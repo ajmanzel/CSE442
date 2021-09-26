@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="" />
+    <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/spotify/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify/artist_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify/login.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

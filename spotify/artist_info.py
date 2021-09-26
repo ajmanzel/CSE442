@@ -1,6 +1,10 @@
-from KEYS.spotifyKeys import *
+# from KEYS.spotifyKeys import *
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import os
+
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 
 def getID(name):
@@ -87,6 +91,7 @@ def getAll(name):
     info['related artists'] = getRelatedArtists(name)
     info['image'] = getArtistImage(name)
     return info
+
 
 test = getAll('Nirvana')
 print(test)
