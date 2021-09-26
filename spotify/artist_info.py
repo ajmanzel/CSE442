@@ -2,11 +2,10 @@ from KEYS.spotifyKeys import *
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
 
 def getID(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     res1 = sp.search(name, limit=1)
     res2 = res1['tracks']
     res3 = dict(res2['items'][0])
@@ -16,6 +15,8 @@ def getID(name):
 
 
 def getTop10Songs(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     topSongs = []
     id = getID(name)
     res1 = sp.artist_top_tracks(id)['tracks']
@@ -25,6 +26,8 @@ def getTop10Songs(name):
 
 
 def getTopAlbums(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     albums = []
     id = getID(name)
     res1 = sp.artist_albums(id)['items']
@@ -45,6 +48,8 @@ def getTopAlbums(name):
 
 
 def getRelatedArtists(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     related_artists = []
     id = getID(name)
     res1 = sp.artist_related_artists(id)['artists']
@@ -54,12 +59,16 @@ def getRelatedArtists(name):
 
 
 def getArtistImage(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     id = getID(name)
     res1 = sp.artist(id)['images']
     return res1[0]['url']
 
 
 def getArtistGenre(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     genres = []
     id = getID(name)
     res1 = sp.artist(id)['genres']
@@ -69,6 +78,8 @@ def getArtistGenre(name):
 
 
 def getAll(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     info = {"name": name, "genre": "", "top songs": "", "albums": "", "related artists": "", "image": ""}
     info['genre'] = getArtistGenre(name)
     info['top songs'] = getTop10Songs(name)
@@ -76,3 +87,6 @@ def getAll(name):
     info['related artists'] = getRelatedArtists(name)
     info['image'] = getArtistImage(name)
     return info
+
+test = getAll('Nirvana')
+print(test)
