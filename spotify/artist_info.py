@@ -1,6 +1,10 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from spotify.KEYS.spotifyKeys import *
+
+# from spotify.KEYS.spotifyKeys import *
+
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
 client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
