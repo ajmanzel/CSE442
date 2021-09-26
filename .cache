@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"access_token": "BQCfU6gEcR2XcoUpfSHH9uaxqdSpOo6OoHychFEjWrZHlSn2CjRCCr3lhsMxFmRpXZnR_T7nIYeYhS9GtLzrjMpH5m1QGJHc7gODooTSzCUKFd01FPWus6WfT_opVjo50Ne5rIYDoakj5QaYkC9OhsUCnaiOmfI4OUeCFm9gLacKdrdxkiljV5V9KhEAmw", "token_type": "Bearer", "expires_in": 3600, "refresh_token": "AQBBFC9lB8U41Rc2tJ6xPKeCKaYjUkb_h__drHSBYw-gOW0dXLrZ0Xayga4tCytWBvfRzZBtYuaELxszxAM8pzIgYGbd5HqPl6dUUKx4h9wS70Pa2bbOWseJk5bQsyUxCak", "scope": "user-top-read playlist-read-collaborative user-read-currently-playing user-follow-read user-follow-modify user-read-email user-modify-playback-state user-read-recently-played app-remote-control user-read-playback-position user-read-playback-state ugc-image-upload", "expires_at": 1632113533}
-=======
-{"access_token": "BQAfx8jvJ_nh_dYiZwQh-YQbrPKx30uzZ3kQvyNjJCGa4CYNJJGmQvzf-EODs_6xHBJeeG6qoEgD3WpV-A8", "token_type": "Bearer", "expires_in": 3600, "expires_at": 1632440943}
->>>>>>> DEVELOP
+{"access_token": "BQCVCd746Rqk3tP_dA4iPKORfGDI8hCkYlPYpKN603L5TjdI4los5k5UD5O2K6AUxY5awNt7uqksqjA9wgQ", "token_type": "Bearer", "expires_in": 3600, "expires_at": 1632683197}

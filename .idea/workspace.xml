@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1596d4f5-3373-45ed-bf6d-4415e9aadf30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/spotify/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify/artist_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify/login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +21,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="DEVELOP" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,7 +65,7 @@
       <workItem from="1632423313154" duration="187000" />
       <workItem from="1632591171320" duration="2755000" />
       <workItem from="1632595545959" duration="84000" />
-      <workItem from="1632595702533" duration="7513000" />
+      <workItem from="1632595702533" duration="3568000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -88,105 +88,17 @@
       <option name="project" value="LOCAL" />
       <updated>1632600358401</updated>
     </task>
-    <task id="LOCAL-00004" summary="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.gitignore&#10;#&#9;.idea/inspectionProfiles/profiles_settings.xml&#10;#&#9;Author.txt&#10;#&#9;discord/main.py">
-      <created>1632601994836</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1632601994836</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.gitignore&#10;#&#9;.idea/inspectionProfiles/profiles_settings.xml&#10;#&#9;Author.txt&#10;#&#9;discord/main.py">
-      <created>1632602296706</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1632602296706</updated>
-    </task>
-    <task id="LOCAL-00006" summary="adding runtime file for heroku #15">
-      <created>1632603058539</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1632603058539</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fixing req file for heroku #15">
-      <created>1632603513026</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1632603513026</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fixing req file for heroku #15">
-      <created>1632603675491</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1632603675491</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fixing req file for heroku #15">
-      <created>1632603797104</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1632603797104</updated>
-    </task>
-    <task id="LOCAL-00010" summary="fixing proc file for heroku #15">
-      <created>1632604587726</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1632604587726</updated>
-    </task>
-    <task id="LOCAL-00011" summary="changing how the token access functions for heroku. environment variables are going to need to be stored on it. #15">
-      <created>1632610018114</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1632610018114</updated>
-    </task>
-    <task id="LOCAL-00012" summary="getting bot back online, any imports need to be placed in the requirements.txt file so heroku knows where to get them for the deployment #15">
-      <created>1632622550401</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1632622550401</updated>
-    </task>
-    <task id="LOCAL-00013" summary="fixing bot from heroku side so it recognizes env vars #15">
-      <created>1632681635176</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1632681635176</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Working pycharm implementation of hello world bot #15" />
     <MESSAGE value="added name to author.txt" />
     <MESSAGE value="adding reqs for heroku deployment #15" />
-    <MESSAGE value="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.gitignore&#10;#&#9;.idea/inspectionProfiles/profiles_settings.xml&#10;#&#9;Author.txt&#10;#&#9;discord/main.py" />
-    <MESSAGE value="adding runtime file for heroku #15" />
-    <MESSAGE value="fixing req file for heroku #15" />
-    <MESSAGE value="fixing proc file for heroku #15" />
-    <MESSAGE value="changing how the token access functions for heroku. environment variables are going to need to be stored on it. #15" />
-    <MESSAGE value="getting bot back online, any imports need to be placed in the requirements.txt file so heroku knows where to get them for the deployment #15" />
-    <MESSAGE value="fixing bot from heroku side so it recognizes env vars #15" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing bot from heroku side so it recognizes env vars #15" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding reqs for heroku deployment #15" />
   </component>
 </project>
