@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/.idea/cse442_activity3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/heroku.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cse442_activity3/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_20_21,_9_26_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_20_21__9_26_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -226,7 +214,7 @@
       <workItem from="1632595545959" duration="84000" />
       <workItem from="1632595702533" duration="3568000" />
       <workItem from="1632770551705" duration="1040000" />
-      <workItem from="1632844053066" duration="1532000" />
+      <workItem from="1632844053066" duration="1841000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -263,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632862491276</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge branch 'DEVELOP' into main&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;adding lecture activity">
+      <created>1632862864592</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1632862864592</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +283,7 @@
     <MESSAGE value="adding reqs for heroku deployment #15" />
     <MESSAGE value="Merge branch 'DEVELOP' into main&#10;&#10;# Conflicts:&#10;#&#9;.cache&#10;#&#9;.idea/workspace.xml&#10;#&#9;spotify/artist_info.py" />
     <MESSAGE value="adding docker attempt to repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding docker attempt to repo" />
+    <MESSAGE value="Merge branch 'DEVELOP' into main&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;adding lecture activity" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'DEVELOP' into main&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;adding lecture activity" />
   </component>
 </project>
