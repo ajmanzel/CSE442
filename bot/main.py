@@ -3,10 +3,10 @@ from discord.ext import commands, tasks
 import youtube_dl
 import os
 import artist_info
-from discKEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
+#from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
 my_secret = os.environ.get('TOKEN')
-my_secret = TOKEN   # Comment this out before pushing please
+#my_secret = TOKEN   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
 
