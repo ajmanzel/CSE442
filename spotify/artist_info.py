@@ -1,4 +1,4 @@
-# from KEYS.spotifyKeys import *
+
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
@@ -17,6 +17,15 @@ def getID(name):
     res5 = dict(res4['artists'][0])
     return res5['id']
 
+def getName(name):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    res1 = sp.search(name, limit=1)
+    res2 = res1['tracks']
+    res3 = dict(res2['items'][0])
+    res4 = res3['album']
+    res5 = dict(res4['artists'][0])
+    return res5['name']
 
 def getTop10Songs(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -80,11 +89,39 @@ def getArtistGenre(name):
         genres.append(i)
     return genres
 
+def getTrackID(name, artist):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    res1 = sp.search(name)
+    res2 = res1['tracks']
+    res3 = res2['items']
+    for i in res3:
+        if artist in str(i):
+            if len(i['name']) == len(name):
+                return i['id']
+
+
+def getRelatedSongs(name, artist):
+    client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    arr = []
+    id = getTrackID(name, artist)
+    res1 = sp.recommendations([],[],[id])
+    res2 = res1['tracks']
+    for i in res2:
+        temp = {"title": i['name'], "artist": ""}
+        res3 = i['artists']
+        res4 = res3[0]
+        temp['artist'] = res4['name']
+        arr.append(temp)
+    return arr
+
 
 def getAll(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    info = {"name": name, "genre": "", "top songs": "", "albums": "", "related artists": "", "image": ""}
+    info = {"name": "", "genre": "", "top songs": "", "albums": "", "related artists": "", "image": ""}
+    info['name'] = getName(name)
     info['genre'] = getArtistGenre(name)
     info['top songs'] = getTop10Songs(name)
     info["albums"] = getTopAlbums(name)
@@ -93,5 +130,5 @@ def getAll(name):
     return info
 
 
-test = getAll('Nirvana')
-print(test)
+
+
