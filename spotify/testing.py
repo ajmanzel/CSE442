@@ -6,6 +6,8 @@ import os
 CLIENT_ID = '63df2b90c04c413ebf70a5868bee07fb'
 CLIENT_SECRET = 'ed55f9adf93d4e75853a7c2f7b5a2b66'
 
+
+
 def getTrackID(name, artist):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -33,9 +35,8 @@ def getRelatedSongs(name, artist):
         arr.append(temp)
     return arr
 
-test = getRelatedSongs("Blinding Lights", "The Weeknd")
-print(test)
-
+testvar = getRelatedSongs("Blinding Lights", "The Weeknd")
+print(testvar)
 
 
 
