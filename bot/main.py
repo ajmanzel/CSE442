@@ -1,8 +1,11 @@
+import os
+
 import discord
 from discord.ext import commands, tasks
 import youtube_dl
-import os
+
 import artist_info
+from ytapi import get_youtube_data
 #from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
 my_secret = os.environ.get('TOKEN')
@@ -37,6 +40,15 @@ async def topsongs(cxt, name: str):
 
 # Currently the issue this faces is within the API call itself. The name given to the bot can get confused and the API
 # returned may be a different artist that was close enough to the spelling. We gottta make sure to fix this.
+
+
+# This is how the bot calls play. The API call made in ytapi.py returns the youtube_dict and the bot prints out the YouTube URL.
+@client.command(pass_context=True)
+async def play(cxt, query: str):
+    youtube_dict = get_youtube_data(query)
+    youtube_url = youtube_dict['video_url']
+    spoken_str = "YouTube URL: " + youtube_url
+    await cxt.send(spoken_str)
 
 
 @client.command(pass_context=True)
