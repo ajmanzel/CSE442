@@ -7,7 +7,7 @@ youtube = build('youtube', 'v3', developerKey=api_key)
 
 
 # Uses API to search YouTube and constructs the video URL.
-def get_youtube_url(query):
+def get_youtube_data(query):
     # search for YouTube video
     video_request = youtube.search().list(
         part='id,snippet',
