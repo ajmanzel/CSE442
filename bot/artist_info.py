@@ -56,7 +56,6 @@ def getTopAlbums(name):
                     count += 1
             if count == 0:
                 albums.append(temp)
-
     return albums
 
 
@@ -117,16 +116,17 @@ def getRelatedSongs(name, artist):
     return arr
 
 
-def getAll(name):
+def getAll(song_title, name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    info = {"name": "", "genre": "", "top songs": "", "albums": "", "related artists": "", "image": ""}
+    info = {"name": "", "genre": "", "top songs": "", "albums": "", "related artists": "", "image": "", "related songs": ""}
     info['name'] = getName(name)
     info['genre'] = getArtistGenre(name)
     info['top songs'] = getTop10Songs(name)
     info["albums"] = getTopAlbums(name)
     info['related artists'] = getRelatedArtists(name)
     info['image'] = getArtistImage(name)
+    info['related songs'] = getRelatedSongs(song_title, name)
     return info
 
 
