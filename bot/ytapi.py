@@ -1,8 +1,10 @@
 from googleapiclient.discovery import build
 import webbrowser
 
+from tokens import YouTubeToken
+
 # Initialize YouTube API
-api_key = 'YTAPI_KEY'
+api_key = YouTubeToken
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 
@@ -34,3 +36,6 @@ def load_youtube_url(url):
     # load url in browser
     new = 2
     webbrowser.open(url, new=new)
+
+if __name__ == '__main__':
+    print(get_youtube_data('Working for the Knife'))
