@@ -1,6 +1,8 @@
-from googleapiclient.discovery import build
-import webbrowser
 import os
+import webbrowser
+
+from googleapiclient.discovery import build
+
 
 # Initialize YouTube API
 api_key = os.environ.get('YTTOKEN')

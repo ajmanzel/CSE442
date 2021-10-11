@@ -55,7 +55,9 @@ async def topsongs(cxt, name: str):
 async def play(cxt, query: str):
     youtube_dict = get_youtube_data(query)
     youtube_url = youtube_dict['video_url']
-    spoken_str = "YouTube URL: " + youtube_url
+    title = youtube_dict['title']
+    artist = youtube_dict['artist']
+    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
     await cxt.send(spoken_str)
 
 
