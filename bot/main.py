@@ -1,9 +1,7 @@
-import os
-
 import discord
 from discord.ext import commands, tasks
 import youtube_dl
-
+import os
 import artist_info
 from ytapi import get_youtube_data
 #from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -12,6 +10,7 @@ my_secret = os.environ.get('TOKEN')
 #my_secret = TOKEN   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out", "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose"]
 
 
 @client.event
@@ -22,6 +21,14 @@ async def on_ready():
 @client.command(pass_context=True)
 async def hello(cxt):
     await cxt.send("Hello World!")
+
+
+@client.command(pass_context=True)
+async def helpme(cxt):
+    currentCommands = "Hi I'm Discify, your all-purpose Discord Music Bot! \n Here's what I can do if you type /(command): \n"
+    for i in commandsList:
+        currentCommands += i + "\n"
+    await cxt.send(currentCommands)
 
 
 # This is how the bot calls topsongs. The API call made by Billy returns back the artistDict and the bot prints out "top songs"
