@@ -64,7 +64,7 @@ async def ping(cxt):
     await cxt.send("Pong!")
 
 @client.command(pass_context=True)
-async def play(cxt, url: str):
+async def playsong(cxt, url: str):
     #cxt.voice_client.stop()
     if cxt.author.voice is None:
         await cxt.send("You're not in a voice channel!")
