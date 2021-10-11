@@ -67,13 +67,14 @@ async def ping(cxt):
 async def playsong(cxt, url: str):
     #cxt.voice_client.stop()
     if cxt.author.voice is None:
-        await cxt.send("You're not in a voice channel!")
-    voice_channel = cxt.author.voice.channel
+        return await cxt.send("You're not in a voice channel!")
+    author = cxt.author
+    voice_channel = author.voice.channel
     if cxt.voice_client is None:
         await voice_channel.connect()
     else:
-        await cxt.voice_channel.move_to(voice_channel)
-
+        await cxt.voice_client.disconnect()
+        await voice_channel.connect()
 
     FFMPEG_OPTIONS = {
         'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
@@ -92,8 +93,11 @@ async def playsong(cxt, url: str):
 
 @client.command(pass_context=True)
 async def goodbye(cxt):
-    await client.voice_client.disconnect()
-    await cxt.send("Goodbye!")
+    for x in client.voice_clients:
+        await cxt.send("Goodbye!")
+        return await x.disconnect()
+
+    return await cxt.send("I am not connected to any voice channel on this server!")
 
 
 client.run(my_secret)
