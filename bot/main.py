@@ -42,7 +42,7 @@ async def helpme(ctx):
 @client.command(pass_context=True)
 async def topsongs(ctx, *namelst):
     name = " ".join(namelst)
-    artistDict = artist_info.getAll(name)
+    artistDict = artist_info.getTop10Songs(name)
     topsongsList = artistDict["top songs"]
     spokenStr = "Here are " + name + "'s top songs:\n"
     for i in topsongsList:

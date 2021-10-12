@@ -4,3 +4,4 @@ spotipy
 google-api-python-client
 PyNaCl
 ffmpeg
+bs4
