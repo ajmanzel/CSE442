@@ -52,7 +52,7 @@ async def topsongs(cxt, name: str):
 
 # This is how the bot calls play. The API call made in ytapi.py returns the youtube_dict and the bot prints out the YouTube URL.
 @client.command(pass_context=True)
-async def play(cxt, query: str):
+async def url(cxt, query: str):
     youtube_dict = get_youtube_data(query)
     youtube_url = youtube_dict['video_url']
     title = youtube_dict['title']
