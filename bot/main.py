@@ -5,12 +5,14 @@ import os
 import artist_info
 import music
 from ytapi import get_youtube_data
-#from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
+
+# from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
 my_secret = os.environ.get('TOKEN')
-#my_secret = TOKEN   # Comment this out before pushing please
+# my_secret = TOKEN   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
+
 intents = discord.Intents.all()
 cogs = [music]
 
@@ -70,6 +72,5 @@ async def url(ctx, *querylst):
 @client.command(pass_context=True)
 async def ping(cxt):
     await cxt.send("Pong!")
-
 
 client.run(my_secret)
