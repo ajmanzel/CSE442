@@ -5,13 +5,17 @@ import youtube_dl
 import os
 import artist_info
 from ytapi import get_youtube_data
-#from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
+
+# from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
 my_secret = os.environ.get('TOKEN')
-#my_secret = TOKEN   # Comment this out before pushing please
+# my_secret = TOKEN   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out", "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose"]
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out",
+                "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
+                "url (songname): I can grab a youtube url of whatever song you like!",
+                "play (songname): I can play a song for you as long as you are in a voice chat!", "goodbye: Later!"]
 
 
 @client.event
@@ -65,9 +69,10 @@ async def url(cxt, query: str):
 async def ping(cxt):
     await cxt.send("Pong!")
 
+
 @client.command(pass_context=True)
 async def play(cxt, url: str):
-    #cxt.voice_client.stop()
+    # cxt.voice_client.stop()
     if cxt.author.voice is None:
         await cxt.send("You're not in a voice channel!")
     voice_channel = cxt.author.voice.channel
@@ -75,7 +80,6 @@ async def play(cxt, url: str):
         await voice_channel.connect()
     else:
         await cxt.voice_channel.move_to(voice_channel)
-
 
     FFMPEG_OPTIONS = {
         'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
@@ -91,6 +95,7 @@ async def play(cxt, url: str):
         url2 = info['formats'][0]['url']
         source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
         vc.play(source)
+
 
 @client.command(pass_context=True)
 async def goodbye(cxt):
