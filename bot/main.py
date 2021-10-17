@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands, tasks
+from discord.player import FFmpegAudio
 import youtube_dl
 import os
 import artist_info
@@ -51,10 +52,12 @@ async def topsongs(cxt, name: str):
 
 # This is how the bot calls play. The API call made in ytapi.py returns the youtube_dict and the bot prints out the YouTube URL.
 @client.command(pass_context=True)
-async def play(cxt, query: str):
+async def url(cxt, query: str):
     youtube_dict = get_youtube_data(query)
     youtube_url = youtube_dict['video_url']
-    spoken_str = "YouTube URL: " + youtube_url
+    title = youtube_dict['title']
+    artist = youtube_dict['artist']
+    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
     await cxt.send(spoken_str)
 
 
@@ -62,6 +65,37 @@ async def play(cxt, query: str):
 async def ping(cxt):
     await cxt.send("Pong!")
 
+@client.command(pass_context=True)
+async def play(cxt, url: str):
+    #cxt.voice_client.stop()
+    if cxt.author.voice is None:
+        await cxt.send("You're not in a voice channel!")
+    voice_channel = cxt.author.voice.channel
+    if cxt.voice_client is None:
+        await voice_channel.connect()
+    else:
+        await cxt.voice_channel.move_to(voice_channel)
+
+
+    FFMPEG_OPTIONS = {
+        'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+        'options': '-vn'
+    }
+    YDL_OPTIONS = {
+        'format': 'bestaudio'
+    }
+    vc = cxt.voice_client
+
+    with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
+        info = ydl.extract_info(url, download=False)
+        url2 = info['formats'][0]['url']
+        source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
+        vc.play(source)
+
+@client.command(pass_context=True)
+async def goodbye(cxt):
+    await client.voice_client.disconnect()
+    await cxt.send("Goodbye!")
 
 
 client.run(my_secret)
