@@ -8,7 +8,7 @@ class Queue:
         self.SongQueue(append)(data)
 
 #Method to take things out of the queue(removes from the front)
-    def dequeue(self)
+    def dequeue(self):
         if self.isempty():
             print("Theres no songs in the Queue!")
             return -1
