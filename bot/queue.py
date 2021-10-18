@@ -1,5 +1,5 @@
-class Queue
-    def __init__(self):
+class Queue:
+   def __init__(self):
         self.front = 0
         self.SongQueue = []
     
