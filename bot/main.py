@@ -19,7 +19,10 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out", "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose"]
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out",
+                "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
+                "url (songname): I can grab a youtube url of whatever song you like!",
+                "play (songname): I can play a song for you as long as you are in a voice chat!", "goodbye: Later!"]
 
 
 @client.event
@@ -63,9 +66,12 @@ async def topsongs(ctx, *namelst):
 @client.command(pass_context=True)
 async def url(ctx, *querylst):
     query = " ".join(querylst)
-    youtube_dict = get_youtube_data(query)
-    youtube_url = youtube_dict['video_url']
-    spoken_str = "YouTube URL: " + youtube_url
+    data = get_youtube_data(query)
+    youtube_url = data['video_url']
+    youtube_url = data['video_url']
+    title = data['title']
+    artist = data['artist']
+    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
     await ctx.send(spoken_str)
 
 
