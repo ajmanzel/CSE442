@@ -63,9 +63,12 @@ async def topsongs(ctx, *namelst):
 @client.command(pass_context=True)
 async def url(ctx, *querylst):
     query = " ".join(querylst)
-    youtube_dict = get_youtube_data(query)
-    youtube_url = youtube_dict['video_url']
-    spoken_str = "YouTube URL: " + youtube_url
+    data = get_youtube_data(query)
+    youtube_url = data['video_url']
+    youtube_url = data['video_url']
+    title = data['title']
+    artist = data['artist']
+    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
     await ctx.send(spoken_str)
 
 
