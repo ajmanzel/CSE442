@@ -19,7 +19,10 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out", "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose"]
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out",
+                "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
+                "url (songname): I can grab a youtube url of whatever song you like!",
+                "play (songname): I can play a song for you as long as you are in a voice chat!", "goodbye: Later!"]
 
 
 @client.event
