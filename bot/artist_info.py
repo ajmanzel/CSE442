@@ -130,5 +130,10 @@ def getAll(song_title, name):
     return info
 
 
-
-
+"""""
+# Local testing
+if __name__ == '__main__':
+    data = getTopAlbums("/albums Troye Sivan")
+    spoken_str = 'Albums: \n' + str(data)
+    print(spoken_str)
+"""""

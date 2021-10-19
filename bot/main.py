@@ -1,9 +1,9 @@
+import os
 import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
-import os
-import artist_info
 import music
+from artist_info import getTop10Songs, getTopAlbums
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -19,10 +19,13 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", "helpme: I assume you've already figured this out",
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", 
+                "helpme: I assume you've already figured this out",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
-                "url (songname): I can grab a youtube url of whatever song you like!",
-                "play (songname): I can play a song for you as long as you are in a voice chat!", "goodbye: Later!"]
+                "url (Song Title): I can grab a youtube url of whatever song you like!",
+                "play (Song Title): I can play a song for you as long as you are in a voice chat!"
+                "albums (Artist Name): I can list an artist top albums.", 
+                "goodbye: Later!"]
 
 
 @client.event
@@ -47,7 +50,7 @@ async def helpme(ctx):
 @client.command(pass_context=True)
 async def topsongs(ctx, *namelst):
     name = " ".join(namelst)
-    artistDict = artist_info.getTop10Songs(name)
+    artistDict = getTop10Songs(name)
     topsongsList = artistDict["top songs"]
     spokenStr = "Here are " + name + "'s top songs:\n"
     for i in topsongsList:
@@ -76,7 +79,16 @@ async def url(ctx, *querylst):
 
 
 @client.command(pass_context=True)
+async def albums(ctx, *querylist):
+    query = " ".join(querylist)
+    data = getTopAlbums(query)
+    spoken_str = "N/A"
+    await ctx.send(spoken_str)
+
+
+@client.command(pass_context=True)
 async def ping(cxt):
     await cxt.send("Pong!")
+
 
 client.run(my_secret)
