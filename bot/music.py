@@ -31,7 +31,7 @@ class music(commands.Cog):
             'options': '-vn'
         }
         YDL_OPTIONS = {
-            'format': 'bestaudio'
+            'format': '249/250/251'
         }
         vc = ctx.voice_client
 
