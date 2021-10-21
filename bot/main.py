@@ -24,7 +24,7 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!"
-                "albums (Artist Name): I can list an artist top albums.", 
+                "topalbums (Artist Name): I can list an artist's top albums.", 
                 "goodbye: Later!"]
 
 
@@ -65,24 +65,44 @@ async def topsongs(ctx, *namelst):
 # returned may be a different artist that was close enough to the spelling. We gottta make sure to fix this.
 
 
-# This is how the bot calls play. The API call made in ytapi.py returns the youtube_dict and the bot prints out the YouTube URL.
+# Bot Command: /play
+# Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
 async def url(ctx, *querylst):
+    # Get user query
     query = " ".join(querylst)
+
+    # Get song data from YouTube API
     data = get_youtube_data(query)
-    youtube_url = data['video_url']
+
+    # Create string the bot will print
     youtube_url = data['video_url']
     title = data['title']
     artist = data['artist']
-    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
+    spoken_str = '"' + title + '" by ' + artist + '\nYouTube URL: ' + youtube_url
+
+    # Bot prints the string
     await ctx.send(spoken_str)
 
 
+# Bot Command: /topalbums
+# Purpose: Returns top albums from a user entered artist.
 @client.command(pass_context=True)
-async def albums(ctx, *querylist):
+async def topalbums(ctx, *querylist):
+    # Get user query
     query = " ".join(querylist)
+
+    # Get artist's top albums from Spotify API
     data = getTopAlbums(query)
-    spoken_str = "N/A"
+
+    # Create string the bot will print
+    spoken_str = 'Top Albums from ' + query + ':\n'
+    data = getTopAlbums(query)
+    for i in data:
+        spoken_str += i['name'] + '\n'
+    spoken_str += '\n'
+
+    # Bot prints the string
     await ctx.send(spoken_str)
 
 
