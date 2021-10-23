@@ -1,7 +1,9 @@
+from time import perf_counter
 import discord
 from discord.ext import commands
 import youtube_dl
 from bs4 import BeautifulSoup
+import artist_info
 from ytapi import get_youtube_data
 
 class music(commands.Cog):
@@ -19,12 +21,27 @@ class music(commands.Cog):
         if ctx.author.voice is None:
             return await ctx.send("You're not in a voice channel!")
         await ctx.send("Now playing: " + soup.text)
+    
         author = ctx.author
         voice_channel = author.voice.channel
         if ctx.voice_client is None:
             await voice_channel.connect()
         else:
             await ctx.voice_client.move_to(voice_channel)
+
+        info = soup.text
+        split = info.split(" - ")
+        artist = split[0]
+        title = split[1]
+        if title.__contains__("(Official"):
+            title = title.split("(Official")[0]
+
+        title = title.strip()
+        artist = artist.strip()
+        
+        res = artist_info.botDisplay(artist_info.getAll(title, artist))
+        for i in res:
+            await ctx.send(i)
 
         FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
