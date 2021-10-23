@@ -1,11 +1,11 @@
 
+from discord.ext.commands import bot
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
-
 
 def getID(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -119,16 +119,93 @@ def getRelatedSongs(name, artist):
 def getAll(song_title, name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    info = {"name": "", "genre": "", "top songs": "", "albums": "", "related artists": "", "image": "", "related songs": ""}
-    info['name'] = getName(name)
+    info = {"genre": "", "top songs": "", "albums": "", "related artists": "", "related songs": "", "image": ""}
     info['genre'] = getArtistGenre(name)
     info['top songs'] = getTop10Songs(name)
     info["albums"] = getTopAlbums(name)
     info['related artists'] = getRelatedArtists(name)
-    info['image'] = getArtistImage(name)
     info['related songs'] = getRelatedSongs(song_title, name)
+    info['image'] = getArtistImage(name)
     return info
 
 
+def botDisplay(info):
+    res = []
+     
+     #genre
+    genre_from_dict = info['genre']
+    str1 = ""
+    for i in genre_from_dict:
+        index = (genre_from_dict.index(i)) + 1
+        if index == len(genre_from_dict):
+            temp = str(i)
+        else:
+            temp = str(i) + ", "
+        str1 += temp
+    res.append("Genre:")
+    res.append(str1)
 
+     #top songs
+    top_songs_from_dict = info['top songs']
+    str2 = ""
+    for i in top_songs_from_dict:
+        index = (top_songs_from_dict.index(i)) + 1
+        if index == len(top_songs_from_dict):
+            temp = str(i)
+        else:
+            temp = str(i) + ", "
+        str2 += temp
+    res.append("Top 10 Songs:")
+    res.append(str2)
+
+     #albums
+    albums_from_dict = info['albums']
+    str3 = ""
+    for i in albums_from_dict:
+        index = (albums_from_dict.index(i)) + 1
+        if index == len(albums_from_dict):
+            temp = str(i['name'])
+        else:
+            temp = str(i['name']) + ", "
+        str3 += temp
+    res.append("Albums:")
+    res.append(str3)
+
+     #related artists
+    related_artists_from_dict = info['related artists']
+    str4 = ""
+    for i in related_artists_from_dict:
+        index = (related_artists_from_dict.index(i)) + 1
+        if index == len(related_artists_from_dict):
+            temp = str(i)
+        else:
+            temp = str(i) + ", "
+        str4 += temp
+    res.append("Related Artists:")
+    res.append(str4)
+
+     #related songs
+    res.append("Related Songs:")
+    related_songs_from_dict = info['related songs']
+    str5 = ""
+    for i in related_songs_from_dict:
+        index = (related_songs_from_dict.index(i)) + 1
+        if index == len(related_songs_from_dict):
+            temp1 = str(i['title'])
+            temp2 = " by " + str(i['artist'])
+            temp3 = temp1 + temp2
+            str5 += temp3
+
+        else:
+            temp1 = str(i['title'])
+            temp2 = " by " + str(i['artist']) + ", " 
+            temp3 = temp1 + temp2
+            str5 += temp3
+
+    res.append(str5)
+
+     #image
+    res.append(info['image'])
+
+    return res
 
