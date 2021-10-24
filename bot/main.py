@@ -3,13 +3,13 @@ import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums
+from artist_info import getTop10Songs, getTopAlbums, getArtistImage
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
-# my_secret = os.environ.get('TOKEN')
-my_secret = "ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.dx4HH6NxIL_o_XAUUegJgzE2v98"   # Comment this out before pushing please
+my_secret = os.environ.get('TOKEN')
+# my_secret = TOKEN   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
 
@@ -25,7 +25,7 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!"
                 "topalbums (Artist Name): I can list an artist's top albums.", 
-                "goodbye: Later!"]
+                "artistPic (Artist Name): I can show you a picture of the artist you request.", "goodbye: Later!"]
 
 
 @client.event

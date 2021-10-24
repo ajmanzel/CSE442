@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 
 # Initialize YouTube API
 # from tokens import YouTubeToken
-# api_key = YouTubeToken
+# api_key = YTTOKEN
 api_key = os.environ.get('YTTOKEN')
 youtube = build('youtube', 'v3', developerKey=api_key)
 

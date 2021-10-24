@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="merged develop main branch">
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634495630819</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="new branch for artist pic and genre commands #55">
+      <created>1635097901041</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1635097901041</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +171,7 @@
     <MESSAGE value="Merge branch 'DEVELOP' into main&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;adding lecture activity" />
     <MESSAGE value="Updated gitignore and procfile, pull this to develop and then merge develop into your task branch #35" />
     <MESSAGE value="merged develop into my issue branch #42" />
-    <option name="LAST_COMMIT_MESSAGE" value="merged develop into my issue branch #42" />
+    <MESSAGE value="new branch for artist pic and genre commands #55" />
+    <option name="LAST_COMMIT_MESSAGE" value="new branch for artist pic and genre commands #55" />
   </component>
 </project>
