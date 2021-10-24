@@ -8,8 +8,8 @@ from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
 
-my_secret = os.environ.get('TOKEN')
-# my_secret = TOKEN   # Comment this out before pushing please
+# my_secret = os.environ.get('TOKEN')
+my_secret = "ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.dx4HH6NxIL_o_XAUUegJgzE2v98"   # Comment this out before pushing please
 
 client = commands.Bot(command_prefix='/')
 
@@ -104,6 +104,14 @@ async def topalbums(ctx, *querylist):
 
     # Bot prints the string
     await ctx.send(spoken_str)
+
+@client.command(pass_context=True)
+async def artistPic(ctx, *querylist):
+    query = " ".join(querylist)
+    data = getArtistImage(query)
+    bottext = 'This is ' + query + ':\n'
+    await ctx.send(bottext)
+    await ctx.send(data)
 
 
 @client.command(pass_context=True)
