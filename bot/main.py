@@ -67,10 +67,6 @@ async def topsongs(ctx, *namelst):
     await ctx.send(spokenStr)
 
 
-# Currently the issue this faces is within the API call itself. The name given to the bot can get confused and the API
-# returned may be a different artist that was close enough to the spelling. We gottta make sure to fix this.
-
-
 # Bot Command: /url
 # Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
