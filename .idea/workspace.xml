@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
-    </list>
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="Merge conflicts in ytapi, main, and artist_info fixed #58" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -143,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635097901041</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Merge conflicts in ytapi, main, and artist_info fixed #58">
+      <created>1635258991272</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635258991272</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +174,7 @@
     <MESSAGE value="Updated gitignore and procfile, pull this to develop and then merge develop into your task branch #35" />
     <MESSAGE value="merged develop into my issue branch #42" />
     <MESSAGE value="new branch for artist pic and genre commands #55" />
-    <option name="LAST_COMMIT_MESSAGE" value="new branch for artist pic and genre commands #55" />
+    <MESSAGE value="Merge conflicts in ytapi, main, and artist_info fixed #58" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge conflicts in ytapi, main, and artist_info fixed #58" />
   </component>
 </project>
