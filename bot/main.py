@@ -74,9 +74,9 @@ async def topsongs(ctx, *namelst):
 # Bot Command: /url
 # Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
-async def url(ctx, *querylst):
+async def url(ctx, *querylist):
     # Get user query
-    query = " ".join(querylst)
+    query = " ".join(querylist)
 
     # Get song data from YouTube API
     data = get_youtube_data(query)
@@ -116,7 +116,7 @@ async def topalbums(ctx, *querylist):
 @client.command(pass_context=True)
 async def relatedartists(ctx, *querylist):
     # Get user query
-    query = "Mitski"
+    query = " ".join(querylist)
 
     # Get artist's related artists from Spotify API
     data = getRelatedArtists(query)
