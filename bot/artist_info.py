@@ -1,4 +1,3 @@
-
 from discord.ext.commands import bot
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -6,6 +5,7 @@ import os
 
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+
 
 def getID(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -17,6 +17,7 @@ def getID(name):
     res5 = dict(res4['artists'][0])
     return res5['id']
 
+
 def getName(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -26,6 +27,7 @@ def getName(name):
     res4 = res3['album']
     res5 = dict(res4['artists'][0])
     return res5['name']
+
 
 def getTop10Songs(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -87,6 +89,7 @@ def getArtistGenre(name):
     for i in res1:
         genres.append(i)
     return genres
+
 
 def getTrackID(name, artist):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
