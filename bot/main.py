@@ -105,6 +105,7 @@ async def topalbums(ctx, *querylist):
     # Bot prints the string
     await ctx.send(spoken_str)
 
+
 @client.command(pass_context=True)
 async def artistPic(ctx, *querylist):
     query = " ".join(querylist)
@@ -112,6 +113,7 @@ async def artistPic(ctx, *querylist):
     bottext = 'This is ' + query + ':\n'
     await ctx.send(bottext)
     await ctx.send(data)
+
 
 @client.command(pass_context=True)
 async def getGenre(ctx, *querylist):
@@ -123,6 +125,7 @@ async def getGenre(ctx, *querylist):
                                                                                       'site https://everynoise.com/ \n'
     await ctx.send(bottext)
     await ctx.send(data)
+
 
 @client.command(pass_context=True)
 async def ping(cxt):
