@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums, getArtistImage
+from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -113,6 +113,16 @@ async def artistPic(ctx, *querylist):
     await ctx.send(bottext)
     await ctx.send(data)
 
+@client.command(pass_context=True)
+async def getGenre(ctx, *querylist):
+    query = " ".join(querylist)
+    data = getArtistGenre(query)
+    bottext = 'Here is the genre information I could find from Spotify on ' + query + '! \n ' \
+                                                                                      'If you want to dive into ' \
+                                                                                      'genres, checkout this cool ' \
+                                                                                      'site https://everynoise.com/ \n'
+    await ctx.send(bottext)
+    await ctx.send(data)
 
 @client.command(pass_context=True)
 async def ping(cxt):
