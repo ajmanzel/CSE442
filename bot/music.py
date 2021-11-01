@@ -1,5 +1,9 @@
+from os import name
 from time import perf_counter
+from typing import Text
 import discord
+from discord import embeds
+from discord.embeds import Embed
 from discord.ext import commands
 import youtube_dl
 from bs4 import BeautifulSoup
@@ -30,18 +34,29 @@ class music(commands.Cog):
             await ctx.voice_client.move_to(voice_channel)
 
         info = soup.text
-        split = info.split(" - ")
-        artist = split[0]
-        title = split[1]
-        if title.__contains__("(Official"):
-            title = title.split("(Official")[0]
+        if info.__contains__('-'):
+            split = info.split(" - ")
+            artist = split[0]
+            title = split[1]
 
-        title = title.strip()
-        artist = artist.strip()
+            if title.__contains__(" ("):
+                title = title.split(" (")[0]
         
-        res = artist_info.botDisplay(artist_info.getAll(title, artist))
-        for i in res:
-            await ctx.send(i)
+            if artist.__contains__(","):
+                artist = artist.split(",")[0]
+
+            title = title.strip()
+            artist = artist.strip()
+        
+            res = artist_info.botDisplay(artist_info.getAll(title, artist))
+
+            if len(res) != 0:
+                await ctx.send(res)
+            else:
+                await ctx.send("No data to display.")
+        else:
+            await ctx.send("No data to display.")
+
 
         FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',

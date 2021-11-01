@@ -16,7 +16,12 @@ def getTrackID(name, artist):
     res3 = res2['items']
     for i in res3:
         if artist in str(i):
-            if len(i['name']) == len(name):
+            tempname = str(i['name'])
+            if tempname.__contains__(" ("):
+                tempname = tempname.split(" (")[0]
+            tempname = tempname.strip()
+
+            if len(tempname) == len(name):
                 return i['id']
 
 
@@ -35,7 +40,8 @@ def getRelatedSongs(name, artist):
         arr.append(temp)
     return arr
 
-testvar = getRelatedSongs("Blinding Lights", "The Weeknd")
+testvar = getRelatedSongs("STAY", "The Kid LAROI")
+#testvar2 = getTrackID("STAY", "The Kid LAROI")
 print(testvar)
 
 
