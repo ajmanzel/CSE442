@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
+from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getRelatedArtists, getArtistGenre
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -24,8 +24,9 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!"
-                "topalbums (Artist Name): I can list an artist's top albums.", 
-                "artistPic (Artist Name): I can show you a picture of the artist you request.", "goodbye: Later!"]
+                "topalbums (Artist Name): I can list an artist's top albums.",
+                "relatedartists (Artist Name): I can list an artist's related artists." 
+                "goodbye: Later!"]
 
 
 @client.event
@@ -33,11 +34,15 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
 
+# Bot Command: /hello
+# Purpose: Displays a greeting message so the discord server member can easily verify if the bot is awake.
 @client.command(pass_context=True)
 async def hello(ctx):
     await ctx.send("Hello World!")
 
 
+# Bot Command: /helpme
+# Purpose: Displays a message containing all available bot commands a discord server member may utilize.
 @client.command(pass_context=True)
 async def helpme(ctx):
     currentCommands = "Hi I'm Discify, your all-purpose Discord Music Bot! \n Here's what I can do if you type /(command): \n"
@@ -46,7 +51,8 @@ async def helpme(ctx):
     await ctx.send(currentCommands)
 
 
-# This is how the bot calls topsongs. The API call made by Billy returns back the artistDict and the bot prints out "top songs"
+# Bot Command: /topsongs
+# Purpose: The Spoitfy API call made by Billy returns back the artistDict and the bot prints out "top songs".
 @client.command(pass_context=True)
 async def topsongs(ctx, *namelst):
     name = " ".join(namelst)
@@ -61,16 +67,12 @@ async def topsongs(ctx, *namelst):
     await ctx.send(spokenStr)
 
 
-# Currently the issue this faces is within the API call itself. The name given to the bot can get confused and the API
-# returned may be a different artist that was close enough to the spelling. We gottta make sure to fix this.
-
-
-# Bot Command: /play
+# Bot Command: /url
 # Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
-async def url(ctx, *querylst):
+async def url(ctx, *querylist):
     # Get user query
-    query = " ".join(querylst)
+    query = " ".join(querylist)
 
     # Get song data from YouTube API
     data = get_youtube_data(query)
@@ -105,24 +107,26 @@ async def topalbums(ctx, *querylist):
     # Bot prints the string
     await ctx.send(spoken_str)
 
-@client.command(pass_context=True)
-async def artistPic(ctx, *querylist):
-    query = " ".join(querylist)
-    data = getArtistImage(query)
-    bottext = 'This is ' + query + ':\n'
-    await ctx.send(bottext)
-    await ctx.send(data)
 
+# Bot Command: /relatedartists
+# Purpose: Returns related artists to a user entered artist.
 @client.command(pass_context=True)
-async def getGenre(ctx, *querylist):
+async def relatedartists(ctx, *querylist):
+    # Get user query
     query = " ".join(querylist)
-    data = getArtistGenre(query)
-    bottext = 'Here is the genre information I could find from Spotify on ' + query + '! \n ' \
-                                                                                      'If you want to dive into ' \
-                                                                                      'genres, checkout this cool ' \
-                                                                                      'site https://everynoise.com/ \n'
-    await ctx.send(bottext)
-    await ctx.send(data)
+
+    # Get artist's related artists from Spotify API
+    data = getRelatedArtists(query)
+
+    # Create string the bot will print
+    spoken_str = 'Related Artists to ' + query + ':\n'
+    for i in data:
+        spoken_str += i + '\n'
+    spoken_str += '\n'
+
+    # Bot prints the string
+    await ctx.send(spoken_str)
+
 
 @client.command(pass_context=True)
 async def ping(cxt):
