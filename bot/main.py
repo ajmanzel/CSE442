@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums, getRelatedArtists
+from artist_info import getTop10Songs, getTopAlbums, getRelatedArtists, getArtistGenre
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
