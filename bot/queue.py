@@ -35,4 +35,11 @@ class Queue:
     def size(self):
         return len(self.SongQueue)
 
+#Method to get back of queue
+    def theback(self):
+        if len(self.SongQueue) == 0:
+            print("There's no song in the queue")
+            return 0
+
+        return self.SongQueue[len(self.SongQueue)]        
 
