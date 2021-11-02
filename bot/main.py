@@ -19,13 +19,13 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", 
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "helpme: I assume you've already figured this out",
+                "play (Song Title): I can play a song for you as long as you are in a voice chat!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
-                "play (Song Title): I can play a song for you as long as you are in a voice chat!"
                 "topalbums (Artist Name): I can list an artist's top albums.",
-                "relatedartists (Artist Name): I can list an artist's related artists." 
+                "relatedartists (Artist Name): I can list an artist's related artists.",
                 "goodbye: Later!"]
 
 
@@ -100,7 +100,7 @@ async def topalbums(ctx, *querylist):
     # Create string the bot will print
     spoken_str = 'Top Albums from ' + query + ':\n'
     for i in data:
-        spoken_str += i['name'] + '\n'
+        spoken_str += '• ' + i['name'] + '\n'
     spoken_str += '\n'
 
     # Bot prints the string
@@ -120,7 +120,7 @@ async def relatedartists(ctx, *querylist):
     # Create string the bot will print
     spoken_str = 'Related Artists to ' + query + ':\n'
     for i in data:
-        spoken_str += i + '\n'
+        spoken_str += '• ' + i + '\n'
     spoken_str += '\n'
 
     # Bot prints the string
