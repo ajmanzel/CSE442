@@ -1,4 +1,4 @@
-class Queue:
+class botQueue:
     def __init__(self):
         self.front = 0
         self.SongQueue = []
