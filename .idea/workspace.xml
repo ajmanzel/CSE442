@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="merged develop main branch">
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
+    </list>
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="merged develop main branch">
+      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +33,10 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="DEVELOP" />
+        <entry key="$PROJECT_DIR$" value="Sprint2-Remove-Queue-Code" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/bot/queue.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1yHCCDyxjoeF8yjaGlkUf437XjZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -52,6 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -135,12 +139,12 @@
       <option name="project" value="LOCAL" />
       <updated>1634495630819</updated>
     </task>
-    <task id="LOCAL-00009" summary="fixing queue.py to bring bot back up #7">
-      <created>1634531326429</created>
+    <task id="LOCAL-00009" summary="new branch for artist pic and genre commands #55">
+      <created>1635097901041</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1634531326429</updated>
+      <updated>1635097901041</updated>
     </task>
     <option name="localTasksCounter" value="10" />
     <servers />
@@ -170,7 +174,7 @@
     <MESSAGE value="Merge branch 'DEVELOP' into main&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;adding lecture activity" />
     <MESSAGE value="Updated gitignore and procfile, pull this to develop and then merge develop into your task branch #35" />
     <MESSAGE value="merged develop into my issue branch #42" />
-    <MESSAGE value="fixing queue.py to bring bot back up #7" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing queue.py to bring bot back up #7" />
+    <MESSAGE value="new branch for artist pic and genre commands #55" />
+    <option name="LAST_COMMIT_MESSAGE" value="new branch for artist pic and genre commands #55" />
   </component>
 </project>

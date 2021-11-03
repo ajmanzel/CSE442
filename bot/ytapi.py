@@ -1,14 +1,11 @@
 import os
 import webbrowser
-
 from googleapiclient.discovery import build
 
 
 # Initialize YouTube API
-# from tokens import YouTubeToken
-# api_key = YouTubeToken
 api_key = os.environ.get('YTTOKEN')
-youtube = build('youtube', 'v3', developerKey=api_key)
+youtube = build('youtube', 'v3', developerKey="AIzaSyCbvqMpCFYO9Vb_otivOeCXNxQhTfXQvRU")
 
 
 # Uses API to search YouTube and constructs the video URL.
@@ -39,15 +36,3 @@ def load_youtube_url(url):
     # load url in browser
     new = 2
     webbrowser.open(url, new=new)
-
-
-"""""
-# Local testing gives expected results, bot does not
-if __name__ == '__main__':
-    data = get_youtube_data("/play happier than ever")
-    youtube_url = data['video_url']
-    title = data['title']
-    artist = data['artist']
-    spoken_str = 'YouTube URL: ' + youtube_url + '\n"' + title + '" by ' + artist
-    print(spoken_str)
-"""""
