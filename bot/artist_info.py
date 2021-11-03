@@ -8,7 +8,6 @@ import os
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 
-
 def getID(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -138,91 +137,10 @@ def getAll(song_title, name):
     info['image'] = getArtistImage(name)
     return info
 
-
-# def botDisplay(info):
-#     res = []
-     
-#      #genre
-#     genre_from_dict = info['genre']
-#     str1 = ""
-#     for i in genre_from_dict:
-#         index = (genre_from_dict.index(i)) + 1
-#         if index == len(genre_from_dict):
-#             temp = str(i)
-#         else:
-#             temp = str(i) + ", "
-#         str1 += temp
-#     res.append("Genre:")
-#     res.append(str1)
-
-#      #top songs
-#     top_songs_from_dict = info['top songs']
-#     str2 = ""
-#     for i in top_songs_from_dict:
-#         index = (top_songs_from_dict.index(i)) + 1
-#         if index == len(top_songs_from_dict):
-#             temp = str(i)
-#         else:
-#             temp = str(i) + ", "
-#         str2 += temp
-#     res.append("Top 10 Songs:")
-#     res.append(str2)
-
-#      #albums
-#     albums_from_dict = info['albums']
-#     str3 = ""
-#     for i in albums_from_dict:
-#         index = (albums_from_dict.index(i)) + 1
-#         if index == len(albums_from_dict):
-#             temp = str(i['name'])
-#         else:
-#             temp = str(i['name']) + ", "
-#         str3 += temp
-#     res.append("Albums:")
-#     res.append(str3)
-
-#      #related artists
-#     related_artists_from_dict = info['related artists']
-#     str4 = ""
-#     for i in related_artists_from_dict:
-#         index = (related_artists_from_dict.index(i)) + 1
-#         if index == len(related_artists_from_dict):
-#             temp = str(i)
-#         else:
-#             temp = str(i) + ", "
-#         str4 += temp
-#     res.append("Related Artists:")
-#     res.append(str4)
-
-#      #related songs
-#     res.append("Related Songs:")
-#     related_songs_from_dict = info['related songs']
-#     str5 = ""
-#     for i in related_songs_from_dict:
-#         index = (related_songs_from_dict.index(i)) + 1
-#         if index == len(related_songs_from_dict):
-#             temp1 = str(i['title'])
-#             temp2 = " by " + str(i['artist'])
-#             temp3 = temp1 + temp2
-#             str5 += temp3
-
-#         else:
-#             temp1 = str(i['title'])
-#             temp2 = " by " + str(i['artist']) + ", " 
-#             temp3 = temp1 + temp2
-#             str5 += temp3
-
-#     res.append(str5)
-
-#      #image
-#     res.append(info['image'])
-
-#     return res
-
 def botDisplay(info):
-    res = ""
+    res = []
      
-     #genre
+    #genre
     genre_from_dict = info['genre']
     str1 = ""
     for i in genre_from_dict:
@@ -232,10 +150,10 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str1 += temp
-    res += "Genre: \n"
-    res += (str1 + "\n")
+    res.append(str1)
+  
 
-     #top songs
+    #top songs
     top_songs_from_dict = info['top songs']
     str2 = ""
     for i in top_songs_from_dict:
@@ -245,10 +163,9 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str2 += temp
-    res += "Top 10 Songs: \n"
-    res += (str2 + "\n")
+    res.append(str2)
 
-     #albums
+    #albums
     albums_from_dict = info['albums']
     str3 = ""
     for i in albums_from_dict:
@@ -258,10 +175,10 @@ def botDisplay(info):
         else:
             temp = str(i['name']) + ", "
         str3 += temp
-    res += "Albums: \n"
-    res += (str3 + "\n")
+    res.append(str3)
 
-     #related artists
+
+    #related artists
     related_artists_from_dict = info['related artists']
     str4 = ""
     for i in related_artists_from_dict:
@@ -271,11 +188,9 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str4 += temp
-    res += "Related Artists: \n"
-    res += (str4 + "\n")
+    res.append(str4)
 
-     #related songs
-    res += "Related Songs: \n"
+    #related songs
     related_songs_from_dict = info['related songs']
     str5 = ""
     for i in related_songs_from_dict:
@@ -291,11 +206,11 @@ def botDisplay(info):
             temp2 = " by " + str(i['artist']) + ", " 
             temp3 = temp1 + temp2
             str5 += temp3
+    res.append(str5)
 
-    res += (str5 + "\n")
 
      #image
-    # res.append(info['image'])
+    res.append(info['image'])
 
     return res
 
