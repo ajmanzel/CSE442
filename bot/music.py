@@ -24,6 +24,16 @@ class music(commands.Cog):
         if not self.queue.isempty(self.queue):
             vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
 
+
+    @commands.command(pass_context=True)
+    async def skip(self, ctx):
+        vc = ctx.voice_client
+        vc.pause()
+        self.queue.dequeue(self.queue)
+        if not self.queue.isempty(self.queue):
+            vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+
+
     @commands.command(pass_context=True)
     async def play(self, ctx, *querylst):
         query = " ".join(querylst)
@@ -83,15 +93,13 @@ class music(commands.Cog):
             url2 = info['formats'][0]['url']
             source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
 
-
-
-            self.queue.enqueue(self.queue, source)
-            if vc.source is None:
+            if vc.source is None or self.queue.isempty(self.queue):
+                self.queue.enqueue(self.queue, source)
                 vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
                 await ctx.send("Now playing: " + soup.text)
             else:
-                await ctx.send("Queued")
-
+                await ctx.send("Queued " + soup.text)
+                self.queue.enqueue(self.queue, source)
 
     @commands.command(pass_context=True)
     async def pause(self, ctx):

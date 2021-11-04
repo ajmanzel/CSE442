@@ -2,6 +2,7 @@ import os
 import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
+from botqueue import botQueue
 import music
 from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
 from ytapi import get_youtube_data
@@ -31,6 +32,8 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    client.queue = botQueue
+    client.queue.__init__(client.queue, client)
 
 
 @client.command(pass_context=True)
@@ -129,4 +132,4 @@ async def ping(cxt):
     await cxt.send("Pong!")
 
 
-client.run(my_secret)
+client.run("ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.Dxjo3QVpz3IBFL5zZ81ao8TPa3I")
