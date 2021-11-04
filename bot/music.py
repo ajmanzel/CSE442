@@ -16,6 +16,7 @@ class music(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.queue = botQueue
+        self.queue.__init__(self.queue, client)
 
     def update(self,ctx):
         self.queue.dequeue(self.queue)
