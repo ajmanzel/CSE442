@@ -54,29 +54,29 @@ class music(commands.Cog):
         ##############
 
         ####BILLY'S SECTION####
-        # info = soup.text
-        # if info.__contains__('-'):
-        #     split = info.split(" - ")
-        #     artist = split[0]
-        #     title = split[1]
+        info = soup.text
+        if info.__contains__('-'):
+            split = info.split(" - ")
+            artist = split[0]
+            title = split[1]
 
-        #     if title.__contains__(" ("):
-        #         title = title.split(" (")[0]
+            if title.__contains__(" ("):
+                title = title.split(" (")[0]
         
-        #     if artist.__contains__(","):
-        #         artist = artist.split(",")[0]
+            if artist.__contains__(","):
+                artist = artist.split(",")[0]
 
-        #     title = title.strip()
-        #     artist = artist.strip()
+            title = title.strip()
+            artist = artist.strip()
         
-        #     res = artist_info.botDisplay(artist_info.getAll(title, artist))
+            res = artist_info.botDisplay(artist_info.getAll(title, artist))
 
-        #     if len(res) != 0:
-        #         await ctx.send(res)
-        #     else:
-        #         await ctx.send("No data to display.")
-        # else:
-        #     await ctx.send("No data to display.")
+            if len(res) != 0:
+                await ctx.send(res)
+            else:
+                await ctx.send("No data to display.")
+        else:
+            await ctx.send("No data to display.")
         ###################
 
         FFMPEG_OPTIONS = {
