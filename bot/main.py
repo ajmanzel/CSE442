@@ -24,8 +24,9 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
-                "play (Song Title): I can play a song for you as long as you are in a voice chat!"
-                "topalbums (Artist Name): I can list an artist's top albums.", 
+                "topalbums (Artist Name): I can list an artist's top albums.",
+                "relatedartists (Artist Name): I can show you a bunch of artists similar to the one you requested!",
+                "getGenre (Artist Name): I can display some information about what genres this artists fits into!",
                 "artistPic (Artist Name): I can show you a picture of the artist you request.", "goodbye: Later!"]
 
 
