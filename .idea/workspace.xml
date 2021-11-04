@@ -140,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635097901041</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixing develop with all commits #55">
+      <created>1636052195726</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1636052195726</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +176,7 @@
     <MESSAGE value="Updated gitignore and procfile, pull this to develop and then merge develop into your task branch #35" />
     <MESSAGE value="merged develop into my issue branch #42" />
     <MESSAGE value="new branch for artist pic and genre commands #55" />
-    <option name="LAST_COMMIT_MESSAGE" value="new branch for artist pic and genre commands #55" />
+    <MESSAGE value="fixing develop with all commits #55" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing develop with all commits #55" />
   </component>
 </project>
