@@ -1,9 +1,10 @@
 import os
 import discord
 from discord.ext import commands, tasks
+from botqueue import botQueue
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getRelatedArtists, getArtistGenre
+from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -19,23 +20,24 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG", 
                 "helpme: I assume you've already figured this out",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "topalbums (Artist Name): I can list an artist's top albums.",
-                "relatedartists (Artist Name): I can list an artist's related artists.",
-                "goodbye: Later!"]
+                "relatedartists (Artist Name): I can show you a bunch of artists similar to the one you requested!",
+                "getGenre (Artist Name): I can display some information about what genres this artists fits into!",
+                "artistPic (Artist Name): I can show you a picture of the artist you request.", "goodbye: Later!"]
 
 
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    client.queue = botQueue
+    client.queue.__init__(client.queue, client)
 
 
-# Bot Command: /hello
-# Purpose: Displays a greeting message so the discord server member can easily verify if the bot is awake.
 @client.command(pass_context=True)
 async def hello(ctx):
     await ctx.send("Hello World!")
@@ -126,6 +128,27 @@ async def relatedartists(ctx, *querylist):
 
     # Bot prints the string
     await ctx.send(spoken_str)
+
+
+@client.command(pass_context=True)
+async def artistPic(ctx, *querylist):
+    query = " ".join(querylist)
+    data = getArtistImage(query)
+    bottext = 'This is ' + query + ':\n'
+    await ctx.send(bottext)
+    await ctx.send(data)
+
+
+@client.command(pass_context=True)
+async def getGenre(ctx, *querylist):
+    query = " ".join(querylist)
+    data = getArtistGenre(query)
+    bottext = 'Here is the genre information I could find from Spotify on ' + query + '! \n ' \
+                                                                                      'If you want to dive into ' \
+                                                                                      'genres, checkout this cool ' \
+                                                                                      'site https://everynoise.com/ \n'
+    await ctx.send(bottext)
+    await ctx.send(data)
 
 
 @client.command(pass_context=True)

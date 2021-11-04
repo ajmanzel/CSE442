@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
-    </list>
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="merged develop main branch">
-      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +25,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Sprint2-Remove-Queue-Code" />
+        <entry key="$PROJECT_DIR$" value="DEVELOP" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -146,7 +138,28 @@
       <option name="project" value="LOCAL" />
       <updated>1635097901041</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixing develop with all commits #55">
+      <created>1636052195726</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1636052195726</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixing develop with all commits #55">
+      <created>1636052521714</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1636052521715</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixing develop to prep for merge #55">
+      <created>1636053206554</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1636053206554</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +188,8 @@
     <MESSAGE value="Updated gitignore and procfile, pull this to develop and then merge develop into your task branch #35" />
     <MESSAGE value="merged develop into my issue branch #42" />
     <MESSAGE value="new branch for artist pic and genre commands #55" />
-    <option name="LAST_COMMIT_MESSAGE" value="new branch for artist pic and genre commands #55" />
+    <MESSAGE value="fixing develop with all commits #55" />
+    <MESSAGE value="fixing develop to prep for merge #55" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing develop to prep for merge #55" />
   </component>
 </project>
