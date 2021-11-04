@@ -16,6 +16,7 @@ class music(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.queue = botQueue
+        self.queue.__init__(self.queue, client)
 
     def update(self,ctx):
         self.queue.dequeue(self.queue)
@@ -70,10 +71,25 @@ class music(commands.Cog):
         
             res = artist_info.botDisplay(artist_info.getAll(title, artist))
 
+            info_str = title + " by " + artist
+
             if len(res) != 0:
-                await ctx.send(res)
+                msg = discord.Embed(
+                    title = info_str,
+                    description = "",
+                    color = 0x1DB954
+                )
+                msg.set_image(url=res[5])
+                msg.add_field(name="Genre:", value=res[0], inline=False)
+                msg.add_field(name="Top Songs:", value=res[1], inline=False)
+                msg.add_field(name="Albums:", value=res[2], inline=False)
+                msg.add_field(name="Similar Artists:", value=res[3], inline=False)
+                msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+
+                await ctx.send(embed = msg)
             else:
                 await ctx.send("No data to display.")
+
         else:
             await ctx.send("No data to display.")
         ###################
