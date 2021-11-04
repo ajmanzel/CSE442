@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands, tasks
+from botqueue import botQueue
 from discord.player import FFmpegAudio
 import music
 from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
@@ -32,6 +33,8 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    client.queue = botQueue
+    client.queue.__init__(client.queue, client)
 
 
 @client.command(pass_context=True)
