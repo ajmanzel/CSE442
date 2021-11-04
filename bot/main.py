@@ -21,6 +21,7 @@ for i in range(len(cogs)):
 
 commandsList = ["hello: I wont leave you hanging", "ping: pOnG", 
                 "helpme: I assume you've already figured this out",
+                "play (Song Title): I can play a song for you as long as you are in a voice chat!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!"
@@ -38,6 +39,8 @@ async def hello(ctx):
     await ctx.send("Hello World!")
 
 
+# Bot Command: /helpme
+# Purpose: Displays a message containing all available bot commands a discord server member may utilize.
 @client.command(pass_context=True)
 async def helpme(ctx):
     currentCommands = "Hi I'm Discify, your all-purpose Discord Music Bot! \n Here's what I can do if you type /(command): \n"
@@ -46,7 +49,8 @@ async def helpme(ctx):
     await ctx.send(currentCommands)
 
 
-# This is how the bot calls topsongs. The API call made by Billy returns back the artistDict and the bot prints out "top songs"
+# Bot Command: /topsongs
+# Purpose: The Spoitfy API call made by Billy returns back the artistDict and the bot prints out "top songs".
 @client.command(pass_context=True)
 async def topsongs(ctx, *namelst):
     name = " ".join(namelst)
@@ -61,16 +65,12 @@ async def topsongs(ctx, *namelst):
     await ctx.send(spokenStr)
 
 
-# Currently the issue this faces is within the API call itself. The name given to the bot can get confused and the API
-# returned may be a different artist that was close enough to the spelling. We gottta make sure to fix this.
-
-
-# Bot Command: /play
+# Bot Command: /url
 # Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
-async def url(ctx, *querylst):
+async def url(ctx, *querylist):
     # Get user query
-    query = " ".join(querylst)
+    query = " ".join(querylist)
 
     # Get song data from YouTube API
     data = get_youtube_data(query)
@@ -99,7 +99,7 @@ async def topalbums(ctx, *querylist):
     spoken_str = 'Top Albums from ' + query + ':\n'
     data = getTopAlbums(query)
     for i in data:
-        spoken_str += i['name'] + '\n'
+        spoken_str += '• ' + i['name'] + '\n'
     spoken_str += '\n'
 
     # Bot prints the string

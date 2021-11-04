@@ -1,8 +1,9 @@
-
 from discord.ext.commands import bot
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
+
+# from bot.testing import CLIENT_ID, CLIENT_SECRET
 
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
@@ -17,6 +18,7 @@ def getID(name):
     res5 = dict(res4['artists'][0])
     return res5['id']
 
+
 def getName(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -26,6 +28,7 @@ def getName(name):
     res4 = res3['album']
     res5 = dict(res4['artists'][0])
     return res5['name']
+
 
 def getTop10Songs(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -88,6 +91,7 @@ def getArtistGenre(name):
         genres.append(i)
     return genres
 
+
 def getTrackID(name, artist):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -96,7 +100,12 @@ def getTrackID(name, artist):
     res3 = res2['items']
     for i in res3:
         if artist in str(i):
-            if len(i['name']) == len(name):
+            tempname = str(i['name'])
+            if tempname.__contains__(" ("):
+                tempname = tempname.split(" (")[0]
+            tempname = tempname.strip()
+
+            if len(tempname) == len(name):
                 return i['id']
 
 
@@ -128,11 +137,10 @@ def getAll(song_title, name):
     info['image'] = getArtistImage(name)
     return info
 
-
 def botDisplay(info):
     res = []
      
-     #genre
+    #genre
     genre_from_dict = info['genre']
     str1 = ""
     for i in genre_from_dict:
@@ -142,10 +150,10 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str1 += temp
-    res.append("Genre:")
     res.append(str1)
+  
 
-     #top songs
+    #top songs
     top_songs_from_dict = info['top songs']
     str2 = ""
     for i in top_songs_from_dict:
@@ -155,10 +163,9 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str2 += temp
-    res.append("Top 10 Songs:")
     res.append(str2)
 
-     #albums
+    #albums
     albums_from_dict = info['albums']
     str3 = ""
     for i in albums_from_dict:
@@ -168,10 +175,10 @@ def botDisplay(info):
         else:
             temp = str(i['name']) + ", "
         str3 += temp
-    res.append("Albums:")
     res.append(str3)
 
-     #related artists
+
+    #related artists
     related_artists_from_dict = info['related artists']
     str4 = ""
     for i in related_artists_from_dict:
@@ -181,11 +188,9 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str4 += temp
-    res.append("Related Artists:")
     res.append(str4)
 
-     #related songs
-    res.append("Related Songs:")
+    #related songs
     related_songs_from_dict = info['related songs']
     str5 = ""
     for i in related_songs_from_dict:
@@ -201,8 +206,8 @@ def botDisplay(info):
             temp2 = " by " + str(i['artist']) + ", " 
             temp3 = temp1 + temp2
             str5 += temp3
-
     res.append(str5)
+
 
      #image
     res.append(info['image'])
