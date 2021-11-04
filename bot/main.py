@@ -106,6 +106,26 @@ async def topalbums(ctx, *querylist):
     await ctx.send(spoken_str)
 
 
+# Bot Command: /relatedartists
+# Purpose: Returns related artists to a user entered artist.
+@client.command(pass_context=True)
+async def relatedartists(ctx, *querylist):
+    # Get user query
+    query = " ".join(querylist)
+
+    # Get artist's related artists from Spotify API
+    data = getRelatedArtists(query)
+
+    # Create string the bot will print
+    spoken_str = 'Related Artists to ' + query + ':\n'
+    for i in data:
+        spoken_str += '• ' + i + '\n'
+    spoken_str += '\n'
+
+    # Bot prints the string
+    await ctx.send(spoken_str)
+
+
 @client.command(pass_context=True)
 async def artistPic(ctx, *querylist):
     query = " ".join(querylist)
