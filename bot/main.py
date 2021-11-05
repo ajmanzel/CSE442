@@ -156,4 +156,4 @@ async def ping(cxt):
     await cxt.send("Pong!")
 
 
-client.run("ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.b7oXcTx8FbvCew-yhPg6qfS3y1s")
+client.run(my_secret)
