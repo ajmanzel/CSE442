@@ -35,7 +35,7 @@ commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     client.queue = botQueue
-    client.queue.__init__(client.queue, client)
+    client.queue.__init__(client.queue)
 
 
 @client.command(pass_context=True)
@@ -156,4 +156,4 @@ async def ping(cxt):
     await cxt.send("Pong!")
 
 
-client.run(my_secret)
+client.run("ODg3Nzc5MTk4OTM5MzEyMTI4.YUJGzw.b7oXcTx8FbvCew-yhPg6qfS3y1s")
