@@ -1,14 +1,38 @@
+from os import name
 from time import perf_counter
+from typing import Text
 import discord
+from discord import embeds
+from discord.embeds import Embed
 from discord.ext import commands
+from discord.ext.commands.core import command
 import youtube_dl
 from bs4 import BeautifulSoup
 import artist_info
+from botqueue import botQueue
 from ytapi import get_youtube_data
 
 class music(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.queue = botQueue
+        self.queue.__init__(self.queue, client)
+
+    def update(self,ctx):
+        self.queue.dequeue(self.queue)
+        vc = ctx.voice_client
+        if not self.queue.isempty(self.queue):
+            vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+
+
+    @commands.command(pass_context=True)
+    async def skip(self, ctx):
+        vc = ctx.voice_client
+        vc.pause()
+        self.queue.dequeue(self.queue)
+        if not self.queue.isempty(self.queue):
+            vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+
 
     @commands.command(pass_context=True)
     async def play(self, ctx, *querylst):
@@ -16,32 +40,59 @@ class music(commands.Cog):
         youtube_dict = get_youtube_data(query)
         url = youtube_dict['video_url']
         titleHTML = youtube_dict['title']
-        soup = BeautifulSoup(titleHTML)
-        print(youtube_dict)
+        soup = BeautifulSoup(titleHTML, features="html.parser")
+        
+        #### JOIN ####
         if ctx.author.voice is None:
             return await ctx.send("You're not in a voice channel!")
-        await ctx.send("Now playing: " + soup.text)
-    
         author = ctx.author
         voice_channel = author.voice.channel
         if ctx.voice_client is None:
             await voice_channel.connect()
         else:
             await ctx.voice_client.move_to(voice_channel)
+        ##############
 
+        ####BILLY'S SECTION####
         info = soup.text
-        split = info.split(" - ")
-        artist = split[0]
-        title = split[1]
-        if title.__contains__("(Official"):
-            title = title.split("(Official")[0]
+        if info.__contains__('-'):
+            split = info.split(" - ")
+            artist = split[0]
+            title = split[1]
 
-        title = title.strip()
-        artist = artist.strip()
+            if title.__contains__(" ("):
+                title = title.split(" (")[0]
         
-        res = artist_info.botDisplay(artist_info.getAll(title, artist))
-        for i in res:
-            await ctx.send(i)
+            if artist.__contains__(","):
+                artist = artist.split(",")[0]
+
+            title = title.strip()
+            artist = artist.strip()
+        
+            res = artist_info.botDisplay(artist_info.getAll(title, artist))
+
+            info_str = title + " by " + artist
+
+            if len(res) != 0:
+                msg = discord.Embed(
+                    title = info_str,
+                    description = "",
+                    color = 0x1DB954
+                )
+                msg.set_image(url=res[5])
+                msg.add_field(name="Genre:", value=res[0], inline=False)
+                msg.add_field(name="Top Songs:", value=res[1], inline=False)
+                msg.add_field(name="Albums:", value=res[2], inline=False)
+                msg.add_field(name="Similar Artists:", value=res[3], inline=False)
+                msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+
+                await ctx.send(embed = msg)
+            else:
+                await ctx.send("No data to display.")
+
+        else:
+            await ctx.send("No data to display.")
+        ###################
 
         FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
@@ -56,7 +107,14 @@ class music(commands.Cog):
             info = ydl.extract_info(url, download=False)
             url2 = info['formats'][0]['url']
             source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
-            vc.play(source)
+
+            if vc.source is None or self.queue.isempty(self.queue):
+                self.queue.enqueue(self.queue, source)
+                vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+                await ctx.send("Now playing: " + soup.text)
+            else:
+                await ctx.send("Queued " + soup.text)
+                self.queue.enqueue(self.queue, source)
 
     @commands.command(pass_context=True)
     async def pause(self, ctx):
@@ -75,4 +133,4 @@ class music(commands.Cog):
             return await x.disconnect()
 
 def setup(client):
-    client.add_cog(music(client))        
+    client.add_cog(music(client)) 
