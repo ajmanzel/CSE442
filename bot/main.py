@@ -19,12 +19,12 @@ cogs = [music]
 for i in range(len(cogs)):
     cogs[i].setup(client)
 
-commandsList = ["hello: I wont leave you hanging", "ping: pOnG", 
+commandsList = ["hello: I wont leave you hanging", "ping: pOnG",
                 "helpme: I assume you've already figured this out",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "play (Song Title): I can play a song for you as long as you are in a voice chat!"
-                "topalbums (Artist Name): I can list an artist's top albums.", 
+                "topalbums (Artist Name): I can list an artist's top albums.",
                 "artistPic (Artist Name): I can show you a picture of the artist you request.", "goodbye: Later!"]
 
 
@@ -123,8 +123,9 @@ async def getGenre(ctx, *querylist):
                                                                                       'If you want to dive into ' \
                                                                                       'genres, checkout this cool ' \
                                                                                       'site https://everynoise.com/ \n'
+    for v in data:
+        bottext += '-' + v + '\n'
     await ctx.send(bottext)
-    await ctx.send(data)
 
 
 @client.command(pass_context=True)
