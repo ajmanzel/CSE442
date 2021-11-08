@@ -149,7 +149,6 @@ async def getGenre(ctx, *querylist):
     for v in data:
         bottext += '-' + v + '\n'
     await ctx.send(bottext)
-    await ctx.send(data)
 
 
 @client.command(pass_context=True)
