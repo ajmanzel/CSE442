@@ -41,5 +41,9 @@ class botQueue:
             print("There's no song in the queue")
             return 0
 
-        return self.SongQueue[len(self.SongQueue)]        
+        return self.SongQueue[len(self.SongQueue)]
+
+#Method to clear queue
+    def clear(self):
+        self.SongQueue = []        
 
