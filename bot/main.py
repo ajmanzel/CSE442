@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands, tasks
-from botqueue import botQueue
 from discord.player import FFmpegAudio
 import music
 from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
@@ -72,9 +71,9 @@ async def topsongs(ctx, *namelst):
 # Bot Command: /url
 # Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 @client.command(pass_context=True)
-async def url(ctx, *querylist):
+async def url(ctx, *querylst):
     # Get user query
-    query = " ".join(querylist)
+    query = " ".join(querylst)
 
     # Get song data from YouTube API
     data = get_youtube_data(query)
@@ -147,6 +146,8 @@ async def getGenre(ctx, *querylist):
                                                                                       'If you want to dive into ' \
                                                                                       'genres, checkout this cool ' \
                                                                                       'site https://everynoise.com/ \n'
+    for v in data:
+        bottext += '-' + v + '\n'
     await ctx.send(bottext)
     await ctx.send(data)
 

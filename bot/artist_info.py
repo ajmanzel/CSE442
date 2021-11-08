@@ -1,3 +1,4 @@
+
 from discord.ext.commands import bot
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -137,10 +138,11 @@ def getAll(song_title, name):
     info['image'] = getArtistImage(name)
     return info
 
+
 def botDisplay(info):
     res = []
      
-    #genre
+     #genre
     genre_from_dict = info['genre']
     str1 = ""
     for i in genre_from_dict:
@@ -150,6 +152,7 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str1 += temp
+    res.append("Genre:")
     res.append(str1)
   
 
@@ -207,7 +210,6 @@ def botDisplay(info):
             temp3 = temp1 + temp2
             str5 += temp3
     res.append(str5)
-
 
      #image
     res.append(info['image'])
