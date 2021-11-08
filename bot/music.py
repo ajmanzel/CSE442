@@ -79,7 +79,6 @@ class music(commands.Cog):
                     description = "",
                     color = 0x1DB954
                 )
-                msg.set_image(url=res[5])
                 msg.add_field(name="Genre:", value=res[0], inline=False)
                 msg.add_field(name="Top Songs:", value=res[1], inline=False)
                 msg.add_field(name="Albums:", value=res[2], inline=False)
