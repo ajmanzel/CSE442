@@ -128,6 +128,7 @@ class music(commands.Cog):
     @commands.command(pass_context=True)
     async def clear(self, ctx):
         self.queue.clear(self.queue)
+        await ctx.send("Queue Cleared!")
 
     @commands.command(pass_context=True)
     async def goodbye(self, ctx):
