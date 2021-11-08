@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands, tasks
 from discord.player import FFmpegAudio
 import music
-from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre
+from artist_info import getTop10Songs, getTopAlbums, getArtistImage, getArtistGenre, getRelatedArtists
 from ytapi import get_youtube_data
 
 # from KEYS.disctoken import *    # Download the discKEYS file and put it in the ./CSE442/discord directory. Personal testing
@@ -100,7 +100,6 @@ async def topalbums(ctx, *querylist):
 
     # Create string the bot will print
     spoken_str = 'Top Albums from ' + query + ':\n'
-    data = getTopAlbums(query)
     for i in data:
         spoken_str += '• ' + i['name'] + '\n'
     spoken_str += '\n'
@@ -129,6 +128,8 @@ async def relatedartists(ctx, *querylist):
     await ctx.send(spoken_str)
 
 
+# Bot Command: /artistPic
+# Purpose: Returns artist pic of a user entered artist.
 @client.command(pass_context=True)
 async def artistPic(ctx, *querylist):
     query = " ".join(querylist)
@@ -138,6 +139,8 @@ async def artistPic(ctx, *querylist):
     await ctx.send(data)
 
 
+# Bot Command: /getGenre
+# Purpose: Returns genre of a user entered artist.
 @client.command(pass_context=True)
 async def getGenre(ctx, *querylist):
     query = " ".join(querylist)
