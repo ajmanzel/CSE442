@@ -126,6 +126,10 @@ class music(commands.Cog):
         await ctx.send("Resumed! ⏯")
 
     @commands.command(pass_context=True)
+    async def clear(self, ctx):
+        self.queue.clear(self.queue)
+
+    @commands.command(pass_context=True)
     async def goodbye(self, ctx):
         for x in self.client.voice_clients:
             await ctx.send("Goodbye!")
