@@ -152,7 +152,6 @@ def botDisplay(info):
         else:
             temp = str(i) + ", "
         str1 += temp
-    res.append("Genre:")
     res.append(str1)
   
 
