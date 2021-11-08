@@ -12,7 +12,6 @@ class botQueue:
         if len(self.SongQueue) == 0:
             print("There's no song in the queue")
             return 0
-
         print("Removing song", self.SongQueue[self.front])
         return self.SongQueue.pop(0)
 
@@ -20,7 +19,6 @@ class botQueue:
     def isempty(self):
         if len(self.SongQueue) == 0:
             return True
-
         return False
 
 #Method to return front of the queue
@@ -28,7 +26,6 @@ class botQueue:
         if len(self.SongQueue) == 0:
             print("There's no song in the queue")
             return 0
-        
         return self.SongQueue[self.front]
 
 #Method to return size of the queue
@@ -40,7 +37,6 @@ class botQueue:
         if len(self.SongQueue) == 0:
             print("There's no song in the queue")
             return 0
-
         return self.SongQueue[len(self.SongQueue)]
 
 #Method to clear queue

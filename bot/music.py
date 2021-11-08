@@ -1,59 +1,127 @@
-from os import name
-from time import perf_counter
-from typing import Text
-import discord
-from discord import embeds
-from discord.embeds import Embed
 from discord.ext import commands
+import re
 from discord.ext.commands.core import command
-import youtube_dl
+import lavalink
+import discord
+from artist_info import *
 from bs4 import BeautifulSoup
-import artist_info
-from botqueue import botQueue
-from ytapi import get_youtube_data
+from ytapi import *
 
-class music(commands.Cog):
-    def __init__(self, client):
-        self.client = client
-        self.queue = botQueue
-        self.queue.__init__(self.queue)
+url_rx = re.compile(r'https?://(?:www\.)?.+')
 
-    def update(self,ctx):
-        self.queue.dequeue(self.queue)
-        vc = ctx.voice_client
-        if not self.queue.isempty(self.queue):
-            vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+class Music(commands.Cog):
 
+############ DONT TOUCH. THIS IS NEEDED FOR THE BOT TO WORK ###############
 
-    @commands.command(pass_context=True)
-    async def skip(self, ctx):
-        vc = ctx.voice_client
-        vc.pause()
-        self.queue.dequeue(self.queue)
-        if not self.queue.isempty(self.queue):
-            vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
+    def __init__(self, bot):
+        self.bot = bot
 
+        if not hasattr(bot, 'lavalink'):
+            bot.lavalink = lavalink.Client(bot.user.id)
+            bot.lavalink.add_node("0.0.0.0", self.bot.lavalinkport, self.bot.lavalinkpass, 'na', 'default-node')
+            bot.add_listener(bot.lavalink.voice_update_handler, 'on_socket_response')
 
-    @commands.command(pass_context=True)
-    async def play(self, ctx, *querylst):
-        query = " ".join(querylst)
-        youtube_dict = get_youtube_data(query)
-        url = youtube_dict['video_url']
-        titleHTML = youtube_dict['title']
-        soup = BeautifulSoup(titleHTML, features="html.parser")
-        
-        #### JOIN ####
-        if ctx.author.voice is None:
-            return await ctx.send("You're not in a voice channel!")
-        author = ctx.author
-        voice_channel = author.voice.channel
-        if ctx.voice_client is None:
-            await voice_channel.connect()
+        lavalink.add_event_hook(self.track_hook)
+
+    def cog_unload(self):
+        self.bot.lavalink._event_hooks.clear()
+
+    async def cog_before_invoke(self, ctx):
+        guild_check = ctx.guild is not None
+        if guild_check:
+            await self.ensure_voice(ctx)
+
+        return guild_check
+
+    async def cog_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandInvokeError):
+            await ctx.send(error.original)
+
+    async def ensure_voice(self, ctx):
+        player = self.bot.lavalink.player_manager.create(ctx.guild.id, endpoint=str(ctx.guild.region))
+        should_connect = ctx.command.name in ('play',)
+
+        if not ctx.author.voice or not ctx.author.voice.channel:
+            raise commands.CommandInvokeError('Join a voicechannel first.')
+
+        if not player.is_connected:
+            if not should_connect:
+                raise commands.CommandInvokeError('Not connected.')
+
+            permissions = ctx.author.voice.channel.permissions_for(ctx.me)
+
+            if not permissions.connect or not permissions.speak:
+                raise commands.CommandInvokeError('I need the `CONNECT` and `SPEAK` permissions.')
+
+            player.store('channel', ctx.channel.id)
+            await self.connect_to(ctx.guild.id, str(ctx.author.voice.channel.id))
         else:
-            await ctx.voice_client.move_to(voice_channel)
-        ##############
+            if int(player.channel_id) != ctx.author.voice.channel.id:
+                raise commands.CommandInvokeError('You need to be in my voicechannel.')
+
+    async def track_hook(self, event):
+        if isinstance(event, lavalink.events.QueueEndEvent):
+            guild_id = int(event.player.guild_id)
+            await self.connect_to(guild_id, None)
+
+    async def connect_to(self, guild_id: int, channel_id: str):
+        ws = self.bot._connection._get_websocket(guild_id)
+        await ws.voice_state(str(guild_id), channel_id)
+
+############ DONT TOUCH. THIS IS NEEDED FOR THE BOT TO WORK ###############
+
+    #The play command. A lot of jargon is used here but uses lavalink to play music.
+    #If the user does "/play" with no input, it will attempt to unpause the song.
+    @commands.command(aliases=['p'])
+    async def play(self, ctx, *querys: str):
+        query = " ".join(querys)
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        query = query.strip('<>')
+        print("'" + query + "'")
+        if query == "" and player.is_playing and player.paused:
+            await player.set_pause(False)
+            return
+
+        if not url_rx.match(query):
+            query = f'ytsearch:{query}'
+
+        results = await player.node.get_tracks(query)
+
+        if not results or not results['tracks']:
+            return await ctx.send('Nothing found!')
+
+        embed = discord.Embed(color=discord.Color.blurple())
+
+        # Valid loadTypes are:
+        #   TRACK_LOADED    - single video/direct URL)
+        #   PLAYLIST_LOADED - direct URL to playlist)
+        #   SEARCH_RESULT   - query prefixed with either ytsearch: or scsearch:.
+        #   NO_MATCHES      - query yielded no results
+        #   LOAD_FAILED     - most likely, the video encountered an exception during loading.
+        if results['loadType'] == 'PLAYLIST_LOADED':
+            tracks = results['tracks']
+
+            for track in tracks:
+                player.add(requester=ctx.author.id, track=track)
+
+            embed.title = 'Playlist Enqueued!'
+            embed.description = f'{results["playlistInfo"]["name"]} - {len(tracks)} tracks'
+        else:
+            track = results['tracks'][0]
+            embed.title = 'Track Enqueued'
+            embed.description = f'[{track["info"]["title"]}]({track["info"]["uri"]})'
+
+            track = lavalink.models.AudioTrack(track, ctx.author.id, recommended=True)
+            player.add(requester=ctx.author.id, track=track)
+
+        await ctx.send(embed=embed)
 
         ####BILLY'S SECTION####
+        #this stuff displays the artist info in a embeded msg
+        youtube_dict = get_youtube_data(query)
+        titleHTML = youtube_dict['title']
+        soup = BeautifulSoup(titleHTML, features="html.parser")
+
         info = soup.text
         if info.__contains__('-'):
             split = info.split(" - ")
@@ -69,7 +137,7 @@ class music(commands.Cog):
             title = title.strip()
             artist = artist.strip()
         
-            res = artist_info.botDisplay(artist_info.getAll(title, artist))
+            res = botDisplay(getAll(title, artist))
 
             info_str = title + " by " + artist
 
@@ -93,48 +161,43 @@ class music(commands.Cog):
             await ctx.send("No data to display.")
         ###################
 
-        FFMPEG_OPTIONS = {
-            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-            'options': '-vn'
-        }
-        YDL_OPTIONS = {
-            'format': '249/250/251'
-        }
-        vc = ctx.voice_client
+        if not player.is_playing:
+            await player.play()
 
-        with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
-            info = ydl.extract_info(url, download=False)
-            url2 = info['formats'][0]['url']
-            source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
+    #Disconnects the player from the voice channel and clears its queue.
+    @commands.command(aliases=['dc'])
+    async def disconnect(self, ctx):
+        """ Disconnects the player from the voice channel and clears its queue. """
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
 
-            if vc.source is None or self.queue.isempty(self.queue):
-                self.queue.enqueue(self.queue, source)
-                vc.play(self.queue.thefront(self.queue), after=lambda x: self.update(ctx))
-                await ctx.send("Now playing: " + soup.text)
-            else:
-                await ctx.send("Queued " + soup.text)
-                self.queue.enqueue(self.queue, source)
+        if not player.is_connected:
+            return await ctx.send('Not connected.')
 
-    @commands.command(pass_context=True)
+        if not ctx.author.voice or (player.is_connected and ctx.author.voice.channel.id != int(player.channel_id)):
+            return await ctx.send('You\'re not in my voicechannel!')
+
+        player.queue.clear()
+        await player.stop()
+        await self.connect_to(ctx.guild.id, None)
+        await ctx.send('*⃣ | Disconnected.')
+
+    #Pauses the song. To unpause just do /play
+    @commands.command()
     async def pause(self, ctx):
-        ctx.voice_client.pause()
-        await ctx.send("Paused! ⏸")
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if player.is_playing:
+            await player.set_pause(True)
 
-    @commands.command(pass_context=True)
-    async def resume(self, ctx):
-        ctx.voice_client.resume()
-        await ctx.send("Resumed! ⏯")
-
-    @commands.command(pass_context=True)
+    #Clears the queue and stops the song
+    @commands.command()
     async def clear(self, ctx):
-        self.queue.clear(self.queue)
-        await ctx.send("Queue Cleared!")
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        player.queue.clear()
+        await player.stop()
+        await ctx.send("Queue Cleared")
 
-    @commands.command(pass_context=True)
-    async def goodbye(self, ctx):
-        for x in self.client.voice_clients:
-            await ctx.send("Goodbye!")
-            return await x.disconnect()
-
-def setup(client):
-    client.add_cog(music(client)) 
+    #Skips the current song, if possible.
+    @commands.command()
+    async def skip(self, ctx):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        await player.skip()
