@@ -104,11 +104,14 @@ class Music(commands.Cog):
             for track in tracks:
                 player.add(requester=ctx.author.id, track=track)
 
-            embed.title = 'Playlist Enqueued!'
+            embed.title = 'Playlist Queued!'
             embed.description = f'{results["playlistInfo"]["name"]} - {len(tracks)} tracks'
         else:
             track = results['tracks'][0]
-            embed.title = 'Track Enqueued'
+            if player.queue == [] and not player.is_playing:
+                embed.title = 'Playing Track!'
+            else:
+                embed.title = 'Track Queued!'
             embed.description = f'[{track["info"]["title"]}]({track["info"]["uri"]})'
 
             track = lavalink.models.AudioTrack(track, ctx.author.id, recommended=True)
@@ -201,3 +204,19 @@ class Music(commands.Cog):
     async def skip(self, ctx):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         await player.skip()
+
+    @commands.command()
+    async def queue(self, ctx):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if player.queue == []:
+            await ctx.send("No Queue Found.")
+        else:
+            embed = discord.Embed(color=discord.Color.blurple())
+            embed.title = "Queue:"
+            desc = ""
+            count = 1
+            for i in player.queue:
+                desc = desc + str(count) + ":  " + i.title + "\n\n"
+                count += 1
+            embed.description = desc
+            await ctx.send(embed=embed)
