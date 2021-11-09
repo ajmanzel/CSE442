@@ -121,11 +121,7 @@ class Music(commands.Cog):
 
         ####BILLY'S SECTION####
         #this stuff displays the artist info in a embeded msg
-        youtube_dict = get_youtube_data(query)
-        titleHTML = youtube_dict['title']
-        soup = BeautifulSoup(titleHTML, features="html.parser")
-
-        info = soup.text
+        info = track.title
         if info.__contains__('-'):
             split = info.split(" - ")
             artist = split[0]
