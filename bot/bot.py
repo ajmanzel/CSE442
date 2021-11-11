@@ -7,20 +7,36 @@ import discord
 from ytapi import *
 from artist_info import *
 
+# Global list containing all availble bot commands
 commandsList = ["hello: I wont leave you hanging", 
                 "ping: pOnG", 
                 "helpme: I assume you've already figured this out",
-                "play (Song Title): I can play a song for you as long as you are in a voice chat!",
+				"play (Song Title): I can play a song for you as long as you are in a voice chat!", 
+				"pause: Pauses the song. Do /play to unpause!",
+				"clear: Clears the queue",
+				"skip: Skips the song",
+                "disconnect: Later!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "topalbums (Artist Name): I can list an artist's top albums.",
                 "relatedartists (Artist Name): I can show you a bunch of artists similar to the one you requested!",
                 "getGenre (Artist Name): I can display some information about what genres this artists fits into!",
-                "artistPic (Artist Name): I can show you a picture of the artist you request.", 
-				"pause: Pauses the song. Do /play to unpause!",
-				"clear: Clears the queue",
-				"skip: Skips the song",
-                "disconnect: Later!"]
+                "artistPic (Artist Name): I can show you a picture of the artist you request."]
+
+
+# Helper function to create embedded message
+def created_embedded_msg(title, description, color, name, value, inline):
+	# Create embedded message
+	embedded_msg = discord.Embed(
+				title = title,
+				description = description,
+				color = color
+			)
+	embedded_msg.add_field(name=name, value=value, inline=inline)
+
+	# Return embedded message
+	return embedded_msg
+
 
 #This class is used to get the body started along with lavalink, the music playing application we use.
 class Bot:
@@ -63,34 +79,54 @@ class init(commands.Cog):
 	# Purpose: Displays a message containing all available bot commands a discord server member may utilize.
 	@commands.command(pass_context=True)
 	async def helpme(self, ctx):
-		currentCommands = "Hi I'm Discify, your all-purpose Discord Music Bot! \n Here's what I can do if you type /(command): \n"
-		for i in commandsList:
-			currentCommands += i + "\n"
-		await ctx.send(currentCommands)
+		# Initialize variables
+		title = "Help"
+		description = "Hi I'm Discify, your all-purpose Discord Music Bot!\nHere's what I can do if you type /(command):\n"
+		color = 0x1DB954
+		commands = ""
+
+		# Format commandsList into string
+		for command in commandsList:
+			commands += "• " + command + "\n"
+
+		# Create embedded message
+		spoken_str = created_embedded_msg(title, description, color, "", commands, True)
+		
+		# Send embedded message
+		await ctx.send(embed = spoken_str)
 
 
 	# Bot Command: /topsongs
-	# Purpose: The Spoitfy API call made by Billy returns back the artistDict and the bot prints out "top songs".
+	# Purpose: Displays a message containing a user entered artist's top 10 songs.
 	@commands.command(pass_context=True)
-	async def topsongs(self, ctx, *namelst):
-		name = " ".join(namelst)
-		artistDict = getTop10Songs(name)
-		topsongsList = artistDict["top songs"]
-		spokenStr = "Here are " + name + "'s top songs:\n"
-		for i in topsongsList:
-			if i == topsongsList[len(topsongsList) - 1]:
-				spokenStr += i
-			else:
-				spokenStr += i + ",\n"
-		await ctx.send(spokenStr)
+	async def topsongs(self, ctx, *querylist):
+		# Initialize variables
+		artist = " ".join(querylist)
+		title = "Top 10 Songs"
+		description = "Here are " + artist + "'s top 10 songs:\n"
+		color = 0x1DB954
+		songs = ""
+
+		# Get artist's top 10 songs from Spotify API
+		top10_list = getTop10Songs(artist)
+		
+		# Format top10_list into string
+		for song in top10_list:
+			songs += "• " + song + "\n"
+
+		# Create embedded message
+		spoken_str = created_embedded_msg(title, description, color, "", songs, True)
+
+		# Send embedded message
+		await ctx.send(embed = spoken_str)
 
 
 	# Bot Command: /url
 	# Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 	@commands.command(pass_context=True)
-	async def url(self, ctx, *querylst):
+	async def url(self, ctx, *querylist):
 		# Get user query
-		query = " ".join(querylst)
+		query = " ".join(querylist)
 
 		# Get song data from YouTube API
 		data = get_youtube_data(query)
@@ -101,7 +137,7 @@ class init(commands.Cog):
 		artist = data['artist']
 		spoken_str = '"' + title + '" by ' + artist + '\nYouTube URL: ' + youtube_url
 
-		# Bot prints the string
+		# Send message string
 		await ctx.send(spoken_str)
 
 
