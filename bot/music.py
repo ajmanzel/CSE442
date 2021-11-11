@@ -193,7 +193,7 @@ class Music(commands.Cog):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         player.queue.clear()
         await player.stop()
-        await ctx.send("Queue Cleared")
+        await ctx.send("Queue cleared.")
 
     #Skips the current song, if possible.
     @commands.command()
@@ -204,15 +204,35 @@ class Music(commands.Cog):
     @commands.command()
     async def queue(self, ctx):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        embed = discord.Embed(color=discord.Color.blurple())
+        embed.title = "Queue:"
+        desc = ""
         if player.queue == []:
-            await ctx.send("No Queue Found.")
+            desc = "Queue is currently empty! Do '/play [SONG NAME]' to queue your next song."
+            embed.description = desc
+            await ctx.send(embed=embed)
         else:
-            embed = discord.Embed(color=discord.Color.blurple())
-            embed.title = "Queue:"
-            desc = ""
             count = 1
             for i in player.queue:
                 desc = desc + str(count) + ":  " + i.title + "\n\n"
                 count += 1
             embed.description = desc
             await ctx.send(embed=embed)
+
+    @commands.command()
+    async def remove(self, ctx, rem: int):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if rem >= 1:
+            rem -= 1
+        else:
+            await ctx.send("Nothing to remove.")
+            return
+        if player.queue == []:
+            await ctx.send("No queue found.")
+        else:
+            try:
+                player.queue.pop(rem)
+                await ctx.invoke(self.bot.get_command('queue'))
+                await ctx.send("Song removed.")
+            except IndexError:
+                await ctx.send("Nothing to remove.")
