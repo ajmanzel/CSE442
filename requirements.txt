@@ -6,4 +6,3 @@ PyNaCl
 ffmpeg
 bs4
 lavalink
-dbdmusic
