@@ -104,11 +104,14 @@ class Music(commands.Cog):
             for track in tracks:
                 player.add(requester=ctx.author.id, track=track)
 
-            embed.title = 'Playlist Enqueued!'
+            embed.title = 'Playlist Queued!'
             embed.description = f'{results["playlistInfo"]["name"]} - {len(tracks)} tracks'
         else:
             track = results['tracks'][0]
-            embed.title = 'Track Enqueued'
+            if player.queue == [] and not player.is_playing:
+                embed.title = 'Playing Track!'
+            else:
+                embed.title = 'Track Queued!'
             embed.description = f'[{track["info"]["title"]}]({track["info"]["uri"]})'
 
             track = lavalink.models.AudioTrack(track, ctx.author.id, recommended=True)
@@ -118,11 +121,7 @@ class Music(commands.Cog):
 
         ####BILLY'S SECTION####
         #this stuff displays the artist info in a embeded msg
-        youtube_dict = get_youtube_data(query)
-        titleHTML = youtube_dict['title']
-        soup = BeautifulSoup(titleHTML, features="html.parser")
-
-        info = soup.text
+        info = track.title
         if info.__contains__('-'):
             split = info.split(" - ")
             artist = split[0]
@@ -194,10 +193,46 @@ class Music(commands.Cog):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         player.queue.clear()
         await player.stop()
-        await ctx.send("Queue Cleared")
+        await ctx.send("Queue cleared.")
 
     #Skips the current song, if possible.
     @commands.command()
     async def skip(self, ctx):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         await player.skip()
+
+    @commands.command()
+    async def queue(self, ctx):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        embed = discord.Embed(color=discord.Color.blurple())
+        embed.title = "Queue:"
+        desc = ""
+        if player.queue == []:
+            desc = "Queue is currently empty! Do '/play [SONG NAME]' to queue your next song."
+            embed.description = desc
+            await ctx.send(embed=embed)
+        else:
+            count = 1
+            for i in player.queue:
+                desc = desc + str(count) + ":  " + i.title + "\n\n"
+                count += 1
+            embed.description = desc
+            await ctx.send(embed=embed)
+
+    @commands.command()
+    async def remove(self, ctx, rem: int):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if rem >= 1:
+            rem -= 1
+        else:
+            await ctx.send("Nothing to remove.")
+            return
+        if player.queue == []:
+            await ctx.send("No queue found.")
+        else:
+            try:
+                player.queue.pop(rem)
+                await ctx.invoke(self.bot.get_command('queue'))
+                await ctx.send("Song removed.")
+            except IndexError:
+                await ctx.send("Nothing to remove.")
