@@ -1,4 +1,3 @@
-
 from discord.ext.commands import bot
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -8,6 +7,7 @@ import os
 
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+
 
 def getID(name):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
@@ -115,7 +115,7 @@ def getRelatedSongs(name, artist):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     arr = []
     id = getTrackID(name, artist)
-    res1 = sp.recommendations([],[],[id])
+    res1 = sp.recommendations([], [], [id])
     res2 = res1['tracks']
     for i in res2:
         temp = {"title": i['name'], "artist": ""}
@@ -141,8 +141,8 @@ def getAll(song_title, name):
 
 def botDisplay(info):
     res = []
-     
-     #genre
+
+    # genre
     genre_from_dict = info['genre']
     str1 = ""
     for i in genre_from_dict:
@@ -153,9 +153,8 @@ def botDisplay(info):
             temp = str(i) + ", "
         str1 += temp
     res.append(str1)
-  
 
-    #top songs
+    # top songs
     top_songs_from_dict = info['top songs']
     str2 = ""
     for i in top_songs_from_dict:
@@ -167,7 +166,7 @@ def botDisplay(info):
         str2 += temp
     res.append(str2)
 
-    #albums
+    # albums
     albums_from_dict = info['albums']
     str3 = ""
     for i in albums_from_dict:
@@ -179,8 +178,7 @@ def botDisplay(info):
         str3 += temp
     res.append(str3)
 
-
-    #related artists
+    # related artists
     related_artists_from_dict = info['related artists']
     str4 = ""
     for i in related_artists_from_dict:
@@ -192,7 +190,7 @@ def botDisplay(info):
         str4 += temp
     res.append(str4)
 
-    #related songs
+    # related songs
     related_songs_from_dict = info['related songs']
     str5 = ""
     for i in related_songs_from_dict:
@@ -205,13 +203,12 @@ def botDisplay(info):
 
         else:
             temp1 = str(i['title'])
-            temp2 = " by " + str(i['artist']) + ", " 
+            temp2 = " by " + str(i['artist']) + ", "
             temp3 = temp1 + temp2
             str5 += temp3
     res.append(str5)
 
-     #image
+    # image
     res.append(info['image'])
 
     return res
-
