@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="fixing develop to prep for merge #55">
-      <change afterPath="$PROJECT_DIR$/bot/logs/spring.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lavalink.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bot/Lavalink.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bot/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +28,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="DEVELOP" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,6 +83,8 @@
       <workItem from="1632770551705" duration="1040000" />
       <workItem from="1632844053066" duration="1841000" />
       <workItem from="1636664447770" duration="1296000" />
+      <workItem from="1636906164097" duration="1194000" />
+      <workItem from="1636911882945" duration="341000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -204,6 +201,7 @@
     <MESSAGE value="new branch for artist pic and genre commands #55" />
     <MESSAGE value="fixing develop with all commits #55" />
     <MESSAGE value="fixing develop to prep for merge #55" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing develop to prep for merge #55" />
+    <MESSAGE value="getting lavalink setup for deployment #69" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting lavalink setup for deployment #69" />
   </component>
 </project>

@@ -167,18 +167,22 @@ class init(commands.Cog):
 	async def relatedartists(self, ctx, *querylist):
 		# Get user query
 		query = " ".join(querylist)
+		title = "Related Artists"
+		description = "Related Artists to " + query + ":\n"
+		color = 0x1DB954
+		artists = ""
 
 		# Get artist's related artists from Spotify API
 		data = getRelatedArtists(query)
 
 		# Create string the bot will print
-		spoken_str = 'Related Artists to ' + query + ':\n'
 		for i in data:
-			spoken_str += '• ' + i + '\n'
-		spoken_str += '\n'
+			artists += '• ' + i + '\n'
+
+		spoken_str = created_embedded_msg(title, description, color, "", artists, True)
 
 		# Bot prints the string
-		await ctx.send(spoken_str)
+		await ctx.send(embed=spoken_str)
 
 
 	# Bot Command: /artistPic
