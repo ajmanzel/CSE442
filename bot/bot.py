@@ -80,7 +80,8 @@ class init(commands.Cog):
 	@commands.command(pass_context=True)
 	async def helpme(self, ctx):
 		# Initialize variables
-		title = "Help"
+		title = "Help Me"
+		name = "Commands List: "
 		description = "Hi I'm Discify, your all-purpose Discord Music Bot!\nHere's what I can do if you type /(command):\n"
 		color = 0x1DB954
 		commands = ""
@@ -90,7 +91,7 @@ class init(commands.Cog):
 			commands += "• " + command + "\n"
 
 		# Create embedded message
-		spoken_str = created_embedded_msg(title, description, color, "", commands, True)
+		spoken_str = created_embedded_msg(title, description, color, name, commands, True)
 		
 		# Send embedded message
 		await ctx.send(embed = spoken_str)
@@ -102,7 +103,8 @@ class init(commands.Cog):
 	async def topsongs(self, ctx, *querylist):
 		# Initialize variables
 		artist = " ".join(querylist)
-		title = "Top 10 Songs"
+		name = "Top 10:"
+		title = "Top Songs"
 		description = "Here are " + artist + "'s top 10 songs:\n"
 		color = 0x1DB954
 		songs = ""
@@ -115,7 +117,7 @@ class init(commands.Cog):
 			songs += "• " + song + "\n"
 
 		# Create embedded message
-		spoken_str = created_embedded_msg(title, description, color, "", songs, True)
+		spoken_str = created_embedded_msg(title, description, color, name, songs, True)
 
 		# Send embedded message
 		await ctx.send(embed = spoken_str)
@@ -157,7 +159,7 @@ class init(commands.Cog):
 			spoken_str += '• ' + i['name'] + '\n'
 		spoken_str += '\n'
 
-		# Bot prints the string
+		# Bot prints the strin
 		await ctx.send(spoken_str)
 
 
@@ -168,6 +170,7 @@ class init(commands.Cog):
 		# Get user query
 		query = " ".join(querylist)
 		title = "Related Artists"
+		name = "You Might Like These: "
 		description = "Related Artists to " + query + ":\n"
 		color = 0x1DB954
 		artists = ""
@@ -179,7 +182,7 @@ class init(commands.Cog):
 		for i in data:
 			artists += '• ' + i + '\n'
 
-		spoken_str = created_embedded_msg(title, description, color, "", artists, True)
+		spoken_str = created_embedded_msg(title, description, color, name, artists, True)
 
 		# Bot prints the string
 		await ctx.send(embed=spoken_str)
