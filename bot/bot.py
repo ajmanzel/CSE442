@@ -157,20 +157,26 @@ class init(commands.Cog):
 	# Purpose: Returns top albums from a user entered artist.
 	@commands.command(pass_context=True)
 	async def topalbums(self, ctx, *querylist):
-		# Get user query
-		query = " ".join(querylist)
+		# Initialize variables
+		artist = " ".join(querylist)
+		title = "Top Albums"
+		description = "Here are your artist's top albums.\n"
+		color = 0x1DB954
+		name = artist + "'s Top Albums:"
+		albums = ""
 
 		# Get artist's top albums from Spotify API
-		data = getTopAlbums(query)
+		topalbums = getTopAlbums(artist)
 
-		# Create string the bot will print
-		spoken_str = 'Top Albums from ' + query + ':\n'
-		for i in data:
-			spoken_str += '• ' + i['name'] + '\n'
-		spoken_str += '\n'
+		# Format topalbums list into string
+		for album in topalbums:
+			albums += '• ' + album['name'] + '\n'
 
-		# Bot prints the strin
-		await ctx.send(spoken_str)
+		# Create embedded message
+		spoken_str = created_embedded_msg(title, description, color, name, albums, True)
+
+		# Send embedded message
+		await ctx.send(embed = spoken_str)
 
 
 	# Bot Command: /relatedartists
@@ -180,9 +186,9 @@ class init(commands.Cog):
 		# Get user query
 		query = " ".join(querylist)
 		title = "Related Artists"
-		name = "You Might Like These: "
 		description = "Related Artists to " + query + ":\n"
 		color = 0x1DB954
+		name = "You Might Like These:"
 		artists = ""
 
 		# Get artist's related artists from Spotify API
@@ -192,6 +198,7 @@ class init(commands.Cog):
 		for i in data:
 			artists += '• ' + i + '\n'
 
+		# Create embedded message
 		spoken_str = created_embedded_msg(title, description, color, name, artists, True)
 
 		# Bot prints the string
