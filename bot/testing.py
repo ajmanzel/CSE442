@@ -3,7 +3,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 
-
 def getTrackID(name, artist):
     client_credentials_manager = SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -37,7 +36,6 @@ def getRelatedSongs(name, artist):
     return arr
 
 testvar = getRelatedSongs("STAY", "The Kid LAROI")
-#testvar2 = getTrackID("STAY", "The Kid LAROI")
 print(testvar)
 
 

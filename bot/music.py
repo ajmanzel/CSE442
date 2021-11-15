@@ -18,7 +18,7 @@ class Music(commands.Cog):
 
         if not hasattr(bot, 'lavalink'):
             bot.lavalink = lavalink.Client(bot.user.id)
-            bot.lavalink.add_node("0.0.0.0", self.bot.lavalinkport, self.bot.lavalinkpass, 'na', 'default-node')
+            bot.lavalink.add_node("127.0.0.1", self.bot.lavalinkport, self.bot.lavalinkpass, 'na', 'default-node')
             bot.add_listener(bot.lavalink.voice_update_handler, 'on_socket_response')
 
         lavalink.add_event_hook(self.track_hook)
@@ -98,6 +98,7 @@ class Music(commands.Cog):
         #   SEARCH_RESULT   - query prefixed with either ytsearch: or scsearch:.
         #   NO_MATCHES      - query yielded no results
         #   LOAD_FAILED     - most likely, the video encountered an exception during loading.
+        test = ""
         if results['loadType'] == 'PLAYLIST_LOADED':
             tracks = results['tracks']
 
@@ -109,8 +110,8 @@ class Music(commands.Cog):
         else:
             track = results['tracks'][0]
             embed.title = 'Track Enqueued'
+            test = f'[{track["info"]["title"]}]'
             embed.description = f'[{track["info"]["title"]}]({track["info"]["uri"]})'
-
             track = lavalink.models.AudioTrack(track, ctx.author.id, recommended=True)
             player.add(requester=ctx.author.id, track=track)
 
@@ -118,15 +119,21 @@ class Music(commands.Cog):
 
         ####BILLY'S SECTION####
         #this stuff displays the artist info in a embeded msg
-        youtube_dict = get_youtube_data(query)
-        titleHTML = youtube_dict['title']
-        soup = BeautifulSoup(titleHTML, features="html.parser")
+        no_data_msg  = discord.Embed(title = "No data to display", description = "", color = 0x1DB954)
+        info = track.title
+        
+        if info.__contains__('-') or info.__contains__('–'):
+            if info.__contains__(" ft."):
+                info = info.split(" ft.")[0]
 
-        info = soup.text
-        if info.__contains__('-'):
-            split = info.split(" - ")
-            artist = split[0]
-            title = split[1]
+            if info.__contains__('-'):
+                split = info.split(" - ")
+                artist = split[0]
+                title = split[1]
+            else:
+                split = info.split(" – ")
+                artist = split[0]
+                title = split[1]
 
             if title.__contains__(" ("):
                 title = title.split(" (")[0]
@@ -138,12 +145,16 @@ class Music(commands.Cog):
             artist = artist.strip()
         
             res = botDisplay(getAll(title, artist))
+        
+            if len(res) == 0:
+                res = botDisplay(getAll(artist, title))
 
-            info_str = title + " by " + artist
+            if len(res) == 0:
+                res = botDisplay(getAll(title, track.author))
 
             if len(res) != 0:
                 msg = discord.Embed(
-                    title = info_str,
+                    title = track.title,
                     description = "",
                     color = 0x1DB954
                 )
@@ -152,13 +163,30 @@ class Music(commands.Cog):
                 msg.add_field(name="Albums:", value=res[2], inline=False)
                 msg.add_field(name="Similar Artists:", value=res[3], inline=False)
                 msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+                msg.set_image(url=res[5])
 
                 await ctx.send(embed = msg)
             else:
-                await ctx.send("No data to display.")
+                await ctx.send(embed = no_data_msg)
 
         else:
-            await ctx.send("No data to display.")
+            res = botDisplay(getAll(track.title, track.author))
+            if len(res) != 0:
+                msg = discord.Embed(
+                    title = track.title,
+                    description = "",
+                    color = 0x1DB954
+                )
+                msg.add_field(name="Genre:", value=res[0], inline=False)
+                msg.add_field(name="Top Songs:", value=res[1], inline=False)
+                msg.add_field(name="Albums:", value=res[2], inline=False)
+                msg.add_field(name="Similar Artists:", value=res[3], inline=False)
+                msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+                msg.set_image(url=res[5])
+
+                await ctx.send(embed = msg)
+            else:
+                await ctx.send(embed = no_data_msg)
         ###################
 
         if not player.is_playing:
