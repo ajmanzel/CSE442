@@ -81,9 +81,9 @@ class init(commands.Cog):
 	async def helpme(self, ctx):
 		# Initialize variables
 		title = "Help Me"
-		name = "Commands List: "
 		description = "Hi I'm Discify, your all-purpose Discord Music Bot!\nHere's what I can do if you type /(command):\n"
 		color = 0x1DB954
+		name = "Commands List:"
 		commands = ""
 
 		# Format commandsList into string
@@ -103,10 +103,10 @@ class init(commands.Cog):
 	async def topsongs(self, ctx, *querylist):
 		# Initialize variables
 		artist = " ".join(querylist)
-		name = "Top 10:"
 		title = "Top Songs"
-		description = "Here are " + artist + "'s top 10 songs:\n"
+		description = "Here are your artist's top 10 songs.\n"
 		color = 0x1DB954
+		name = artist + "'s Top 10:"
 		songs = ""
 
 		# Get artist's top 10 songs from Spotify API
@@ -127,20 +127,30 @@ class init(commands.Cog):
 	# Purpose: Returns the song title, channel name, and YouTube url from a user entered song.
 	@commands.command(pass_context=True)
 	async def url(self, ctx, *querylist):
-		# Get user query
+		# Initialize variables
 		query = " ".join(querylist)
+		title = "Song URL"
+		description = "Here is the title, artist, and YouTube url for your song.\n"
+		color = 0x1DB954
+		video_title = "Title:"
+		video_channel = "Artist:"
+		video_url = "YouTube URL:"
 
 		# Get song data from YouTube API
 		data = get_youtube_data(query)
 
-		# Create string the bot will print
-		youtube_url = data['video_url']
-		title = data['title']
-		artist = data['artist']
-		spoken_str = '"' + title + '" by ' + artist + '\nYouTube URL: ' + youtube_url
+		# Access variables from YouTube data dictionary
+		song_title = data['title']
+		song_channel = data['artist']
+		song_url = data['video_url']
+		
+		# Create embedded message
+		spoken_str = created_embedded_msg(title, description, color, video_title, song_title, True)
+		spoken_str.add_field(name=video_channel, value=song_channel, inline=True)
+		spoken_str.add_field(name=video_url, value=song_url, inline=True)
 
-		# Send message string
-		await ctx.send(spoken_str)
+		# Send embedded message
+		await ctx.send(embed = spoken_str)
 
 
 	# Bot Command: /topalbums
