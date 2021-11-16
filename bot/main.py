@@ -1,10 +1,10 @@
 import os
 from bot import Bot
 
-ON_HEROKU = os.environ.get('ON_HEROKU')
+ON_HEROKU = os.environ.get('HEROKU_ON')
 
-if ON_HEROKU:
-    port = int(os.environ.get('PORT', 5000))
+if HEROKU_ON:
+    port = int(os.environ.get('PORT'))
 else:
     port = 8080
 

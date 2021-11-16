@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="trying again to get lavalink server on heroku #69">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bot/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/applicationOpp.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bot/applicationOpp.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +27,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="DEVELOP" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -182,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636912256931</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="trying again to get lavalink server on heroku #69">
+      <created>1637098595345</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1637098595345</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +220,7 @@
     <MESSAGE value="getting lavalink setup for deployment #69" />
     <MESSAGE value="implement embedded message for related artist command #55" />
     <MESSAGE value="making sure develop is up-to-date with repo #69" />
-    <option name="LAST_COMMIT_MESSAGE" value="making sure develop is up-to-date with repo #69" />
+    <MESSAGE value="trying again to get lavalink server on heroku #69" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying again to get lavalink server on heroku #69" />
   </component>
 </project>
