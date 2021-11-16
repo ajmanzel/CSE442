@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bot/logs/spring.log.2021-11-11.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/applicationOpp.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/logs/spring.log.2021-11-14.0.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bot/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/logs/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/bot/logs/spring.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
@@ -92,6 +92,7 @@
       <workItem from="1636906164097" duration="1194000" />
       <workItem from="1636911882945" duration="1856000" />
       <workItem from="1636915109833" duration="1105000" />
+      <workItem from="1637094585522" duration="2388000" />
     </task>
     <task id="LOCAL-00001" summary="Working pycharm implementation of hello world bot #15">
       <created>1632187916530</created>
@@ -217,6 +218,7 @@
     <MESSAGE value="fixing develop to prep for merge #55" />
     <MESSAGE value="getting lavalink setup for deployment #69" />
     <MESSAGE value="implement embedded message for related artist command #55" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement embedded message for related artist command #55" />
+    <MESSAGE value="making sure develop is up-to-date with repo #69" />
+    <option name="LAST_COMMIT_MESSAGE" value="making sure develop is up-to-date with repo #69" />
   </component>
 </project>
