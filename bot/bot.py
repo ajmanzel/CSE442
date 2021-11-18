@@ -251,8 +251,3 @@ class init(commands.Cog):
 				count += 1
 				if count == 2:
 					await ctx.send(line)
-		ONHER = os.environ.get('ON_HEROKU')
-		if ONHER:
-			await ctx.send("TRUE")
-		else:
-			await ctx.send("FALSE")
