@@ -237,5 +237,10 @@ class init(commands.Cog):
 
 
 	@commands.command(pass_context=True)
-	async def ping(self, cxt):
-		await cxt.send("Pong!")
+	async def ping(self, ctx):
+		await ctx.send("Pong!")
+
+	@commands.command(pass_context=True)
+	async def testing(self, ctx):
+		port = os.environ.get("PORT")
+		await ctx.send(port)
