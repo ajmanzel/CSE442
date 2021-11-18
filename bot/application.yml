@@ -1,5 +1,5 @@
 server: # REST and WS server
-  port: 80
+  port: DYNAMICPORT
   address: discify.ddns.net
 lavalink:
   server:
