@@ -1,14 +1,20 @@
 import os
 from bot import Bot
-from Naked.toolshed.shell import execute_js
+import fileinput
 
 ON_HEROKU = os.environ.get('ON_HEROKU')
-port = 8080
+port = '8080'
 if ON_HEROKU:
-    success = execute_js('bootstrap.js')
-    port = int(os.environ.get('PORT'))
+    port = os.environ.get('PORT')
+    textToSearch = 'DYNAMICPORT'
+    fileToSearch  = "bot/application.yml"
+    tempFile = open( fileToSearch, 'r+' )
 
-bot = Bot(prefix='$', lavalinkpass="password", lavalinkport=port)
+    for line in fileinput.input(fileToSearch):
+        tempFile.write( line.replace( textToSearch, port ) )
+    tempFile.close()
+
+bot = Bot(prefix='$', lavalinkpass="password", lavalinkport=int(port))
 
 my_secret = os.environ.get('TOKEN')
 
