@@ -1,6 +1,6 @@
 server: # REST and WS server
-  port: 46716
-  address: 8.8.8.8
+  port: 80
+  address: discify.ddns.net
 lavalink:
   server:
     password: "password"

@@ -1,14 +1,11 @@
 import os
 from bot import Bot
+#from Naked.toolshed.shell import execute_js
 
-ON_HEROKU = os.environ.get('HEROKU_ON')
+bot = Bot(prefix='$', lavalinkpass="password", lavalinkport=80)
 
-if ON_HEROKU:
-    port = int(os.environ.get('PORT'))
-else:
-    port = 8080
-
-bot = Bot(prefix='/', lavalinkpass="password", lavalinkport=port)
+#success = execute_js('bootstrap.js')
 
 my_secret = os.environ.get('TOKEN')
+
 bot.connect(my_secret)

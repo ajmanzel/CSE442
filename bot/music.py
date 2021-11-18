@@ -4,7 +4,6 @@ from discord.ext.commands.core import command
 import lavalink
 import discord
 from artist_info import *
-from bs4 import BeautifulSoup
 from ytapi import *
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
@@ -18,7 +17,7 @@ class Music(commands.Cog):
 
         if not hasattr(bot, 'lavalink'):
             bot.lavalink = lavalink.Client(bot.user.id)
-            bot.lavalink.add_node("127.0.0.1", self.bot.lavalinkport, self.bot.lavalinkpass, 'na', 'default-node')
+            bot.lavalink.add_node("discify.ddns.net", self.bot.lavalinkport, self.bot.lavalinkpass, 'na', 'default-node')
             bot.add_listener(bot.lavalink.voice_update_handler, 'on_socket_response')
 
         lavalink.add_event_hook(self.track_hook)
