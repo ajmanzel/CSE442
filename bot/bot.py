@@ -244,3 +244,7 @@ class init(commands.Cog):
 	async def testing(self, ctx):
 		port = os.environ.get("PORT")
 		await ctx.send(port)
+		with open("application.yml") as file:
+			for line in file:
+				await ctx.send(line[1])
+				await ctx.send(line[2])
