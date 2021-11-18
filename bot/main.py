@@ -7,7 +7,7 @@ port = '8080'
 if ON_HEROKU:
     port = os.environ.get('PORT')
     textToSearch = 'DYNAMICPORT'
-    fileToSearch  = "bot/application.yml"
+    fileToSearch  = "./application.yml"
     tempFile = open( fileToSearch, 'r+' )
 
     for line in fileinput.input(fileToSearch):
