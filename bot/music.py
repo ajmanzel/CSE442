@@ -1,8 +1,10 @@
+from discord.embeds import Embed
 from discord.ext import commands
 import re
 from discord.ext.commands.core import command
 import lavalink
 import discord
+from lavalink.events import Event, QueueEndEvent
 from artist_info import *
 from bs4 import BeautifulSoup
 from ytapi import *
@@ -42,7 +44,7 @@ class Music(commands.Cog):
         should_connect = ctx.command.name in ('play',)
 
         if not ctx.author.voice or not ctx.author.voice.channel:
-            raise commands.CommandInvokeError('Join a voicechannel first.')
+            raise commands.CommandInvokeError('Join a voice channel first.')
 
         if not player.is_connected:
             if not should_connect:
@@ -72,6 +74,15 @@ class Music(commands.Cog):
 
     #The play command. A lot of jargon is used here but uses lavalink to play music.
     #If the user does "/play" with no input, it will attempt to unpause the song.
+    # async def testing(self, ctx, _callback):
+    #     player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+    #     player.play()
+    #     await _callback(ctx)
+
+    # async def doit(self,ctx):
+    #     await ctx.send("it did it")
+
+
     @commands.command(aliases=['p'])
     async def play(self, ctx, *querys: str):
         query = " ".join(querys)
@@ -120,80 +131,10 @@ class Music(commands.Cog):
 
         await ctx.send(embed=embed)
 
-        ####BILLY'S SECTION####
-        #this stuff displays the artist info in a embeded msg
-        no_data_msg  = discord.Embed(title = "No data to display", description = "", color = 0x1DB954)
-        info = track.title
-        
-        if info.__contains__('-') or info.__contains__('–'):
-            if info.__contains__(" ft."):
-                info = info.split(" ft.")[0]
-
-            if info.__contains__('-'):
-                split = info.split(" - ")
-                artist = split[0]
-                title = split[1]
-            else:
-                split = info.split(" – ")
-                artist = split[0]
-                title = split[1]
-
-            if title.__contains__(" ("):
-                title = title.split(" (")[0]
-        
-            if artist.__contains__(","):
-                artist = artist.split(",")[0]
-
-            title = title.strip()
-            artist = artist.strip()
-        
-            res = botDisplay(getAll(title, artist))
-        
-            if len(res) == 0:
-                res = botDisplay(getAll(artist, title))
-
-            if len(res) == 0:
-                res = botDisplay(getAll(title, track.author))
-
-            if len(res) != 0:
-                msg = discord.Embed(
-                    title = track.title,
-                    description = "",
-                    color = 0x1DB954
-                )
-                msg.add_field(name="Genre:", value=res[0], inline=False)
-                msg.add_field(name="Top Songs:", value=res[1], inline=False)
-                msg.add_field(name="Albums:", value=res[2], inline=False)
-                msg.add_field(name="Similar Artists:", value=res[3], inline=False)
-                msg.add_field(name="Similar Songs:", value=res[4], inline=False)
-                msg.set_image(url=res[5])
-
-                await ctx.send(embed = msg)
-            else:
-                await ctx.send(embed = no_data_msg)
-
-        else:
-            res = botDisplay(getAll(track.title, track.author))
-            if len(res) != 0:
-                msg = discord.Embed(
-                    title = track.title,
-                    description = "",
-                    color = 0x1DB954
-                )
-                msg.add_field(name="Genre:", value=res[0], inline=False)
-                msg.add_field(name="Top Songs:", value=res[1], inline=False)
-                msg.add_field(name="Albums:", value=res[2], inline=False)
-                msg.add_field(name="Similar Artists:", value=res[3], inline=False)
-                msg.add_field(name="Similar Songs:", value=res[4], inline=False)
-                msg.set_image(url=res[5])
-
-                await ctx.send(embed = msg)
-            else:
-                await ctx.send(embed = no_data_msg)
-        ###################
-
         if not player.is_playing:
             await player.play()
+
+                       
 
     #Disconnects the player from the voice channel and clears its queue.
     @commands.command(aliases=['dc'])
@@ -218,6 +159,114 @@ class Music(commands.Cog):
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         if player.is_playing:
             await player.set_pause(True)
+      
+    @commands.command()
+    async def info(self, ctx, *querys:str):
+        query = " ".join(querys)
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        query = query.strip('<>')
+        no_data_msg  = discord.Embed(title = "No data to display", description = "", color = 0x1DB954)
+        wrong_format = discord.Embed(
+            title = "Please format command as /info <song title> by <artist>. Capitalization and spelling must be exact.", 
+            description = "", 
+            color = 0x1DB954
+        )
+
+        if query == "":
+            #display current info
+            info = player.current.title
+        
+            if info.__contains__('-') or info.__contains__('–'):
+                if info.__contains__(" ft."):
+                    info = info.split(" ft.")[0]
+
+                if info.__contains__(" feat."):
+                    info = info.split(" feat.")[0]
+
+                if info.__contains__('-'):
+                    split = info.split(" - ")
+                    artist = split[0]
+                    title = split[1]
+                else:
+                    split = info.split(" – ")
+                    artist = split[0]
+                    title = split[1]
+
+                if title.__contains__(" ("):
+                    title = title.split(" (")[0]
+        
+                if artist.__contains__(","):
+                    artist = artist.split(",")[0]
+
+                title = title.strip()
+                artist = artist.strip()
+
+                if getTrackID(title, artist) == None:
+                    await ctx.send(embed = no_data_msg)
+                else:
+                    res = botDisplay(getAll(title, artist))
+        
+                    if len(res) == 0:
+                        res = botDisplay(getAll(artist, title))
+
+                    if len(res) != 0:
+                        msg = discord.Embed(
+                            title = player.current.title,
+                            description = "",
+                            color = 0x1DB954
+                        )
+                        msg.add_field(name="Genre:", value=res[0], inline=False)
+                        msg.add_field(name="Top Songs:", value=res[1], inline=False)
+                        msg.add_field(name="Albums:", value=res[2], inline=False)
+                        msg.add_field(name="Similar Artists:", value=res[3], inline=False)
+                        msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+                        msg.set_image(url=res[5])
+                        await ctx.send(embed = msg)
+                    else:
+                        await ctx.send(embed = no_data_msg)  
+        else:
+            title = ""
+            artist = ""
+            if query.__contains__("by") or query.__contains__("By"):
+                if query.__contains__("by"):
+                    s = query.split("by")
+                    title = s[0]
+                    artist = s[1]
+                else:
+                    s = query.split("By")
+                    title = s[0]
+                    artist = s[1]
+
+                title = title.strip()
+                artist = artist.strip()
+                if getTrackID(title, artist) == None:
+                    await ctx.send(embed = no_data_msg)
+                else:
+                    res = botDisplay(getAll(title, artist))
+        
+                    if len(res) == 0:
+                        res = botDisplay(getAll(artist, title))
+
+                    if len(res) != 0:
+                        msg = discord.Embed(
+                            title = title,
+                            description = "",
+                            color = 0x1DB954
+                        )
+                        msg.add_field(name="Genre:", value=res[0], inline=False)
+                        msg.add_field(name="Top Songs:", value=res[1], inline=False)
+                        msg.add_field(name="Albums:", value=res[2], inline=False)
+                        msg.add_field(name="Similar Artists:", value=res[3], inline=False)
+                        msg.add_field(name="Similar Songs:", value=res[4], inline=False)
+                        msg.set_image(url=res[5])
+
+                        await ctx.send(embed = msg)
+                    else:
+                        await ctx.send(embed = no_data_msg)
+            else:
+                await ctx.send(embed = wrong_format)
+
+
 
     #Clears the queue and stops the song
     @commands.command()

@@ -8,7 +8,7 @@ if ON_HEROKU:
 else:
     port = 8080
 
-bot = Bot(prefix='/', lavalinkpass="password", lavalinkport=port)
+bot = Bot(prefix='/', lavalinkpass="password", lavalinkport=8080)
 
 my_secret = os.environ.get('TOKEN')
 bot.connect(my_secret)
