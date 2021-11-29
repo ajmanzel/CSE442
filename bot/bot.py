@@ -210,10 +210,13 @@ class init(commands.Cog):
 	@commands.command(pass_context=True)
 	async def artistPic(self, ctx, *querylist):
 		query = " ".join(querylist)
+		title = "Artist Pic"
+		description = 'This is ' + query + ':\n'
+		color = 0x1DB954
+		name = query
 		data = getArtistImage(query)
-		bottext = 'This is ' + query + ':\n'
-		await ctx.send(bottext)
-		await ctx.send(data)
+		spoken_str = created_embedded_msg(title, description, color, name, data, True)
+		await ctx.send(embed=spoken_str)
 
 
 	# Bot Command: /getGenre
