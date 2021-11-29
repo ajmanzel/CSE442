@@ -7,7 +7,6 @@ from googleapiclient.discovery import build
 api_key = os.environ.get('YTTOKEN')
 youtube = build('youtube', 'v3', developerKey=api_key)
 
-
 # Uses API to search YouTube and constructs the video URL.
 def get_youtube_data(query):
     # search for YouTube video

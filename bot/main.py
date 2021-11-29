@@ -15,7 +15,7 @@ for line in fileinput.input(fileToSearch):
         tempFile.write( line.replace( textToSearch, port ) )
 tempFile.close()
 """
-bot = Bot(prefix='$', lavalinkpass="password", lavalinkport=int(port))
+bot = Bot(prefix='/', lavalinkpass="password", lavalinkport=int(port))
 
 my_secret = os.environ.get('TOKEN')
 

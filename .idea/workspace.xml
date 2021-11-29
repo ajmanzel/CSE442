@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="trying again to get lavalink server on heroku #69" />
+    <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/logs/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/bot/logs/spring.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/music.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/ytapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/ytapi.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +33,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="DEVELOP" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -191,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637099349457</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="getting set up for demo tomorrow #69">
+      <created>1638144947233</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1638144947233</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +241,7 @@
     <MESSAGE value="implement embedded message for related artist command #55" />
     <MESSAGE value="making sure develop is up-to-date with repo #69" />
     <MESSAGE value="trying again to get lavalink server on heroku #69" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying again to get lavalink server on heroku #69" />
+    <MESSAGE value="getting set up for demo tomorrow #69" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting set up for demo tomorrow #69" />
   </component>
 </project>
