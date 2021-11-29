@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="703b4e45-1096-4463-bd07-9ee821cbfd37" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/bot/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/artist_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/artist_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/logs/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/bot/logs/spring.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/music.py" afterDir="false" />

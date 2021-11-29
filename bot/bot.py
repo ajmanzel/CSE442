@@ -16,6 +16,7 @@ commandsList = ["hello: I wont leave you hanging",
 				"clear: Clears the queue",
 				"skip: Skips the song",
                 "disconnect: Later!",
+				"info (Song Name): I'll grab as much information as possible about the currently playing song, or any other!",
                 "topsongs (Artist Name): I'll show you the top ten songs of whatever artist you choose",
                 "url (Song Title): I can grab a youtube url of whatever song you like!",
                 "topalbums (Artist Name): I can list an artist's top albums.",
@@ -210,13 +211,14 @@ class init(commands.Cog):
 	@commands.command(pass_context=True)
 	async def artistPic(self, ctx, *querylist):
 		query = " ".join(querylist)
-		title = "Artist Pic"
-		description = 'This is ' + query + ':\n'
-		color = 0x1DB954
-		name = query
+		msg = discord.Embed(
+			title="Artist Pic",
+			description='This is ' + query + ':\n',
+			color=0x1DB954
+		)
 		data = getArtistImage(query)
-		spoken_str = created_embedded_msg(title, description, color, name, data, True)
-		await ctx.send(embed=spoken_str)
+		msg.set_image(url=data)
+		await ctx.send(embed = msg)
 
 
 	# Bot Command: /getGenre
@@ -224,14 +226,21 @@ class init(commands.Cog):
 	@commands.command(pass_context=True)
 	async def getGenre(self, ctx, *querylist):
 		query = " ".join(querylist)
-		data = getArtistGenre(query)
-		bottext = 'Here is the genre information I could find from Spotify on ' + query + '! \n ' \
+		title = "Get Genre"
+		description = 'Here is the genre information I could find from Spotify on ' + query + '! \n ' \
 																						'If you want to dive into ' \
 																						'genres, checkout this cool ' \
 																						'site https://everynoise.com/ \n'
+		color = 0x1DB954
+		name = "Genres: "
+		genres = ""
+		data = getArtistGenre(query)
+
 		for v in data:
-			bottext += '-' + v + '\n'
-		await ctx.send(bottext)
+			genres += '-' + v + '\n'
+
+		spoken_str = created_embedded_msg(title, description, color, name, genres, True)
+		await ctx.send(embed=spoken_str)
 
 
 	@commands.command(pass_context=True)
