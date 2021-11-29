@@ -146,9 +146,9 @@ class init(commands.Cog):
 		song_url = data['video_url']
 		
 		# Create embedded message
-		spoken_str = created_embedded_msg(title, description, color, video_title, song_title, True)
-		spoken_str.add_field(name=video_channel, value=song_channel, inline=True)
-		spoken_str.add_field(name=video_url, value=song_url, inline=True)
+		spoken_str = created_embedded_msg(title, description, color, video_title, song_title, False)
+		spoken_str.add_field(name=video_channel, value=song_channel, inline=False)
+		spoken_str.add_field(name=video_url, value=song_url, inline=False)
 
 		# Send embedded message
 		await ctx.send(embed = spoken_str)
