@@ -237,7 +237,7 @@ class init(commands.Cog):
 		data = getArtistGenre(query)
 
 		for v in data:
-			genres += '-' + v + '\n'
+			genres += '•' + v + '\n'
 
 		spoken_str = created_embedded_msg(title, description, color, name, genres, True)
 		await ctx.send(embed=spoken_str)
